@@ -1,0 +1,4 @@
+1. Copy project
+2. Set stacscheck path in Makefile
+3. Uncomment /.idea/ in .gitignore and remove /.idea/ from git
+4. Remove this SETUP file
