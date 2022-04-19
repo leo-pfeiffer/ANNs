@@ -35,7 +35,6 @@ Make sure to compile (`make compile`) the project before using any of the other 
 compile      Compile all java files
 clean        Remove java class files
 test         Run JUnit tests
-stacscheck   Run stacscheck checks (only on school server)
 evaluation   Run the evaluation (run experiments, create plots)
 help         Print available commands
 ```
