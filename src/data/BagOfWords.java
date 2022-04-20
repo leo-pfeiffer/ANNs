@@ -1,8 +1,7 @@
 package src.data;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import src.util.FileUtil;
 
 /**
  * Wrapper around int[] representing a bag of words.
@@ -37,20 +36,11 @@ public class BagOfWords {
         return bag;
     }
 
-    public static int bagSizeFromFile(String path) throws IOException {
-        return countLinesInFile(path);
-    }
-
-    /**
-     * Count number of lines in a file (if the line is not empty).
-     * */
-    private static int countLinesInFile(String path) throws IOException {
-        int numLines = 0;
-        BufferedReader br = new BufferedReader(new FileReader(path));
-        String line;
-        while ((line = br.readLine()) != null) {
-            if (!line.trim().isEmpty()) numLines++;
+    public double[] toDouble() {
+        double[] doubles = new double[bagSize];
+        for (int i = 0; i < bagSize; i++) {
+            doubles[i] = bag[i];
         }
-        return numLines;
+        return doubles;
     }
 }

@@ -1,4 +1,4 @@
-import data.BagOfWordsTest;
+import util.FileUtilTest;
 import data.TrecDatasetWordsTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -10,7 +10,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses(
         {
                 TrecDatasetWordsTest.class,
-                BagOfWordsTest.class
+                FileUtilTest.class
         }
 )
 public class TestSuite {

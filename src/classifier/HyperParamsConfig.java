@@ -17,8 +17,8 @@ public enum HyperParamsConfig {
             int patience,
             int batchSize,
             int numHiddenLayers,
-            int numInputNodes,
-            int numNodesPerHiddenLayer
+            int sizeFirstHiddenLayer,
+            int sizeOtherHiddenLayers
     ) {
         params = new HyperParams(
                 learningRate,
@@ -26,8 +26,12 @@ public enum HyperParamsConfig {
                 patience,
                 batchSize,
                 numHiddenLayers,
-                numInputNodes,
-                numNodesPerHiddenLayer
+                sizeFirstHiddenLayer,
+                sizeOtherHiddenLayers
         );
+    }
+
+    public HyperParams getParams() {
+        return params;
     }
 }

@@ -7,8 +7,8 @@ public class HyperParams {
     private int patience;
     private int batchSize;
     private int numHiddenLayers;
-    private int numInputNodes;
-    private int numNodesPerHiddenLayer;
+    private int sizeFirstHiddenLayer;
+    private int sizeOtherHiddenLayers;
 
     public HyperParams() {}
 
@@ -18,15 +18,15 @@ public class HyperParams {
             int patience,
             int batchSize,
             int numHiddenLayers,
-            int numInputNodes,
-            int numNodesPerHiddenLayer) {
+            int sizeFirstHiddenLayer,
+            int sizeOtherHiddenLayers) {
         this.learningRate = learningRate;
         this.maxNumEpochs = maxNumEpochs;
         this.patience = patience;
         this.batchSize = batchSize;
         this.numHiddenLayers = numHiddenLayers;
-        this.numInputNodes = numInputNodes;
-        this.numNodesPerHiddenLayer = numNodesPerHiddenLayer;
+        this.sizeFirstHiddenLayer = sizeFirstHiddenLayer;
+        this.sizeOtherHiddenLayers = sizeOtherHiddenLayers;
     }
 
     public double getLearningRate() {
@@ -49,12 +49,12 @@ public class HyperParams {
         return numHiddenLayers;
     }
 
-    public int getNumInputNodes() {
-        return numInputNodes;
+    public int getSizeFirstHiddenLayer() {
+        return sizeFirstHiddenLayer;
     }
 
-    public int getNumNodesPerHiddenLayer() {
-        return numNodesPerHiddenLayer;
+    public int getSizeOtherHiddenLayers() {
+        return sizeOtherHiddenLayers;
     }
 
     public void setLearningRate(double learningRate) {
@@ -77,12 +77,12 @@ public class HyperParams {
         this.numHiddenLayers = numHiddenLayers;
     }
 
-    public void setNumInputNodes(int numInputNodes) {
-        this.numInputNodes = numInputNodes;
+    public void setSizeFirstHiddenLayer(int sizeFirstHiddenLayer) {
+        this.sizeFirstHiddenLayer = sizeFirstHiddenLayer;
     }
 
-    public void setNumNodesPerHiddenLayer(int numNodesPerHiddenLayer) {
-        this.numNodesPerHiddenLayer = numNodesPerHiddenLayer;
+    public void setSizeOtherHiddenLayers(int sizeOtherHiddenLayers) {
+        this.sizeOtherHiddenLayers = sizeOtherHiddenLayers;
     }
 
 }
