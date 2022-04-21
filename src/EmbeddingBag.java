@@ -1,6 +1,7 @@
 package src;
 
 import org.jblas.*;
+import java.util.ArrayList;
 import java.util.List;
 import minet.layer.init.*;
 import minet.layer.Layer;
@@ -25,7 +26,8 @@ public class EmbeddingBag implements Layer, java.io.Serializable {
      * @param wInit (WeightInit) weight initialisation method
      */
     public EmbeddingBag(int vocabSize, int outdims, WeightInit wInit) {
-        // YOUR CODE HERE
+        this.W = wInit.generate(vocabSize, outdims);
+        this.gW = DoubleMatrix.zeros(vocabSize, outdims);
     }
 
     /**
@@ -35,11 +37,57 @@ public class EmbeddingBag implements Layer, java.io.Serializable {
      */
     @Override
     public DoubleMatrix forward(Object input) {
-        DoubleMatrix Y = null; // output of this layer (to be computed by you)
+        DoubleMatrix X = (DoubleMatrix)input;
+        this.X = toExplicit(X);
 
-        // YOUR CODE HERE
+        double[][] y = new double[X.rows][this.W.columns];
 
-        return Y;
+        for (int i = 0; i < X.rows; i++) {
+            for (int j = 0; j < this.W.columns; j++) {
+                y[i][j] = calcElem(i, j);
+            }
+        }
+        return new DoubleMatrix(y);
+    }
+
+    /**
+     * Compute an element for the final matrix corresponding to the dot product
+     * of `xRow` row of the X matrix and `wCol` column of the W matrix.
+     * @param xRow the row in the X matrix
+     * @param wCol the column in the W matrix
+     * @return dot product of the two vectors
+     * */
+    private double calcElem(int xRow, int wCol) {
+        double sum = 0;
+        for (int i : this.X.get(xRow)) {
+            sum += this.W.get(i, wCol);
+        }
+        return sum;
+    }
+
+    /**
+     * Convert a binary matrix (domain {0, 1}) to explicit representation.
+     * The representation is a list of integer arrays. Each array corresponds to a row
+     * of the original matrix and the elements of the array are the indices in the original
+     * row where the element is 1.
+     *
+     * @param X the boolean matrix
+     * @return explicit representation
+     * */
+    private List<int[]> toExplicit(DoubleMatrix X) {
+        ArrayList<int[]> explicit = new ArrayList<>(X.rows);
+        for (int i = 0; i < X.rows; i++) {
+            int[] row = new int[(int) X.getRow(i).sum()];
+            int idx = 0;
+            for (int j = 0; j < X.columns; j ++) {
+                if (X.get(i, j) == 1) {
+                    row[idx] = j;
+                    idx++;
+                }
+            }
+            explicit.add(row);
+        }
+        return explicit;
     }
 
     @Override

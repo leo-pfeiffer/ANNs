@@ -16,6 +16,7 @@ import minet.optim.SGD;
 import minet.util.Pair;
 import org.jblas.DoubleMatrix;
 import org.jblas.util.Logger;
+import src.EmbeddingBag;
 import src.data.BagOfWords;
 import src.data.TrecDataset;
 import src.util.FileUtil;
@@ -75,7 +76,20 @@ public class TrecClassifier {
                 // todo how to specify different size for first layer?
                 new Linear(bagSize, params.getSizeOtherHiddenLayers(), new WeightInitXavier()),
                 new ReLU(),
-                new ReLU(),
+                new Linear(params.getSizeOtherHiddenLayers(), numClasses, new WeightInitXavier()),
+                new Softmax()});
+
+        this.lossFunc = new CrossEntropy();
+        this.optimizer = new SGD(net, params.getLearningRate());
+        System.out.println(net);
+    }
+
+    public void createNetworkWithEmbedding() {
+        System.out.println("\nCreating network...");
+
+        this.net = new Sequential(new Layer[] {
+                // todo how to specify different size for first layer?
+                new EmbeddingBag(bagSize, params.getSizeOtherHiddenLayers(), new WeightInitXavier()),
                 new ReLU(),
                 new Linear(params.getSizeOtherHiddenLayers(), numClasses, new WeightInitXavier()),
                 new Softmax()});
@@ -158,10 +172,9 @@ public class TrecClassifier {
                 break;
 
             // perform forward pass to compute Yhat (the predictions)
-            // each row of Yhat is a probability distribution over 10 digits
             DoubleMatrix Yhat = net.forward(batch.first);
 
-            // the predicted digit for each image is the one with the highest probability
+            // the predicted class is the one with the highest probability
             int[] preds = Yhat.rowArgmaxs();
 
             // count how many predictions are correct
