@@ -72,7 +72,8 @@ public class TrecClassifier {
         System.out.println("\nCreating network...");
 
         this.net = new Sequential(new Layer[] {
-                new Linear(bagSize, params.getSizeFirstHiddenLayer(), new WeightInitXavier()),
+                // todo how to specify different size for first layer?
+                new Linear(bagSize, params.getSizeOtherHiddenLayers(), new WeightInitXavier()),
                 new ReLU(),
                 new ReLU(),
                 new ReLU(),
@@ -100,8 +101,6 @@ public class TrecClassifier {
                 Pair<DoubleMatrix, DoubleMatrix> batch = fromBatch(trainSet.getNextMiniBatch());
 
                 if (batch == null) break;
-
-                System.out.println(batch.first.rows + " x " + batch.first.columns + ", " + batch.second.rows + " x " + batch.second.columns);
 
                 // always reset the gradients before performing backward
                 optimizer.resetGradients();
