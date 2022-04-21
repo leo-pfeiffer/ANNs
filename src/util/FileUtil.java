@@ -1,7 +1,9 @@
 package src.util;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileUtil {
@@ -16,5 +18,11 @@ public class FileUtil {
             if (!line.trim().isEmpty()) numLines++;
         }
         return numLines;
+    }
+
+    public static void stringToFile(String path, String content) throws IOException {
+        BufferedWriter bw = new BufferedWriter(new FileWriter(path));
+        bw.write(content);
+        bw.close();
     }
 }

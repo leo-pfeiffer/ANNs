@@ -1,8 +1,10 @@
-package evaluation.out;
+package evaluation;
 
+import java.io.IOException;
 import src.classifier.TrecClassifier;
 import src.hyperparam.HyperParams;
 import src.hyperparam.Tuning;
+import src.util.FileUtil;
 
 public class HyperParamTuning {
 
@@ -19,7 +21,7 @@ public class HyperParamTuning {
 //        int[] patiences = new int[]{5, 10, 15, 50};
 //        int[] sizeFirst = new int[]{50, 100, 200};
 //        int[] sizeOthers = new int[]{50, 200, 400};
-        double[] learningRates = new double[]{0.1, 0.15};
+        double[] learningRates = new double[]{0.1, 0.15, 0.2};
         int[] patiences = new int[]{3};
         int[] sizeFirst = new int[]{50};
         int[] sizeOthers = new int[]{50};
@@ -59,6 +61,7 @@ public class HyperParamTuning {
         } while ((param = tuning.getNextSetting()) != null);
 
         HyperParams optim = tuning.getOptimalParams();
+        toFile("tuning1.txt", tuning);
     }
 
     // should give same result as part 1
@@ -80,6 +83,16 @@ public class HyperParamTuning {
         } while ((param = tuning.getNextSetting()) != null);
 
         HyperParams optim = tuning.getOptimalParams();
+        toFile("tuning2.txt", tuning);
+    }
+
+    public static void toFile(String name, Tuning tuning) {
+        try {
+            FileUtil.stringToFile("evaluation/out/" + name, tuning.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
     }
 
     public static void main(String[] args) {

@@ -85,4 +85,15 @@ public class HyperParams {
         this.sizeOtherHiddenLayers = sizeOtherHiddenLayers;
     }
 
+    @Override
+    public String toString() {
+        return "learningRate: " + learningRate + "\n" +
+                "maxNumEpochs: " + maxNumEpochs + "\n" +
+                "patience: " + patience + "\n" +
+                "batchSize: " + batchSize + "\n" +
+                "numHiddenLayers: " + numHiddenLayers + "\n" +
+                "sizeFirstHiddenLayer: " + sizeFirstHiddenLayer + "\n" +
+                "sizeOtherHiddenLayers: " + sizeOtherHiddenLayers + "\n";
+    }
+
 }

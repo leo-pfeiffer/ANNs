@@ -33,6 +33,11 @@ public class Tuning {
     }
 
     public HyperParams getOptimalParams() {
+        int best = getOptimalParamsIdx();
+        return settings.get(best);
+    }
+
+    public int getOptimalParamsIdx() {
         double acc = 0;
         int best = -1;
         for (int i = 0; i < this.settings.size(); i++) {
@@ -41,6 +46,18 @@ public class Tuning {
                 best = i;
             }
         }
-        return settings.get(best);
+        return best;
+    }
+
+    public String toString() {
+        int best = getOptimalParamsIdx();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < settings.size(); i++) {
+            sb.append(settings.get(i).toString()).append("\n");
+            if (best == i) sb.append("* ");
+            sb.append("Acc ====> ").append(vals.get(i));
+            sb.append("\n\n=========================\n\n");
+        }
+        return sb.toString();
     }
 }
