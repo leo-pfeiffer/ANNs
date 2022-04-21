@@ -1,4 +1,4 @@
-package src.classifier;
+package src.hyperparam;
 
 public class HyperParams {
 

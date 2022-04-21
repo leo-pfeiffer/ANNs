@@ -1,4 +1,4 @@
-package src.classifier;
+package src.hyperparam;
 
 public enum HyperParamsConfig {
     PART1(0.1,

@@ -1,7 +1,7 @@
 package src;
 
-import src.classifier.HyperParams;
-import src.classifier.HyperParamsConfig;
+import src.hyperparam.HyperParams;
+import src.hyperparam.HyperParamsConfig;
 import src.classifier.TrecClassifier;
 
 public class A4Main {

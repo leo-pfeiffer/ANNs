@@ -19,6 +19,7 @@ import org.jblas.util.Logger;
 import src.EmbeddingBag;
 import src.data.BagOfWords;
 import src.data.TrecDataset;
+import src.hyperparam.HyperParams;
 import src.util.FileUtil;
 
 public class TrecClassifier {
@@ -153,9 +154,10 @@ public class TrecClassifier {
         System.out.println("\ntraining is finished");
     }
 
-    public void evaluate() {
+    public double evaluate() {
         double testAcc = eval(testSet);
         System.out.printf("\nTest accuracy: %.4f\n", testAcc);
+        return testAcc;
     }
 
     public double eval(TrecDataset data) {
