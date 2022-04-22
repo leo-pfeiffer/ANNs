@@ -15,9 +15,10 @@ public class EmbeddingBag implements Layer, java.io.Serializable {
 	
 	DoubleMatrix W;  // weight matrix (for simplicity, we can ignore the bias term b)
 
+    int vocabSize;
+
     // for backward
     List<int[]> X;  // store input X for computing backward, each element in this list is a sample (an array of word indices).
-    List<int[]> Xt;  // transposed X
     DoubleMatrix gW;    // gradient of W
 
     /**
@@ -27,6 +28,7 @@ public class EmbeddingBag implements Layer, java.io.Serializable {
      * @param wInit (WeightInit) weight initialisation method
      */
     public EmbeddingBag(int vocabSize, int outdims, WeightInit wInit) {
+        this.vocabSize = vocabSize;
         this.W = wInit.generate(vocabSize, outdims);
         this.gW = DoubleMatrix.zeros(vocabSize, outdims);
     }
@@ -40,7 +42,6 @@ public class EmbeddingBag implements Layer, java.io.Serializable {
     public DoubleMatrix forward(Object input) {
         DoubleMatrix X = (DoubleMatrix)input;
         this.X = toExplicit(X);
-        this.Xt = toExplicit(X.transpose());
 
         double[][] y = new double[X.rows][this.W.columns];
 
@@ -94,13 +95,41 @@ public class EmbeddingBag implements Layer, java.io.Serializable {
         return explicit;
     }
 
+    // transpose explicit
+    public static ArrayList<int[]> transposeExplicit(List<int[]> explicit, int vocabSize) {
+
+        ArrayList<List<Integer>> transposedList = new ArrayList<>(vocabSize);
+
+        // init
+        for (int i = 0; i < vocabSize; i++) transposedList.add(new ArrayList<>());
+
+        // transpose
+        for (int i = 0; i < explicit.size(); i++) {
+            for (int j : explicit.get(i)) {
+                transposedList.get(j).add(i);
+            }
+        }
+
+        // convert to array
+        ArrayList<int[]> transposed = new ArrayList<>(vocabSize);
+        for (List<Integer> list : transposedList) {
+            int[] array = new int[list.size()];
+            for(int j = 0; j < list.size(); j++) array[j] = list.get(j);
+            transposed.add(array);
+        }
+
+        return transposed;
+    }
+
     @Override
     public DoubleMatrix backward(DoubleMatrix gY) {
         double[][] gWnew = new double[this.W.rows][this.W.columns];
 
+        List<int[]> Xt = transposeExplicit(this.X, this.vocabSize);
+
         for (int i = 0; i < this.W.rows; i++) {
             for (int j = 0; j < this.W.columns; j++) {
-                gWnew[i][j] = calcElem(i, j, this.Xt, gY);
+                gWnew[i][j] = calcElem(i, j, Xt, gY);
             }
         }
 

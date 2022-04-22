@@ -1,7 +1,10 @@
 package test;
 
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.Random;
 import minet.layer.Layer;
 import minet.layer.Sequential;
@@ -22,7 +25,7 @@ public class EmbeddingBagTest {
     Random rnd = new Random(42);
 
     @Test
-    public void gradientTest() {
+    public void testGradient() {
         // todo not sure if this is correct
 
         DoubleMatrix X = new DoubleMatrix(
@@ -39,6 +42,36 @@ public class EmbeddingBagTest {
         CrossEntropy loss = new CrossEntropy();
         boolean pass = GradientChecker.checkGradient(net, loss, X, Y);
         assertTrue(pass);
+    }
+
+    @Test
+    public void testTransposeExplicit() {
+        ArrayList<int[]> explicit = new ArrayList<>();
+        explicit.add(new int[]{2, 3});
+        explicit.add(new int[]{7, 8});
+        explicit.add(new int[]{9});
+
+        ArrayList<int[]> expected = new ArrayList<>();
+        expected.add(new int[]{});
+        expected.add(new int[]{});
+        expected.add(new int[]{0});
+        expected.add(new int[]{0});
+        expected.add(new int[]{});
+        expected.add(new int[]{});
+        expected.add(new int[]{});
+        expected.add(new int[]{1});
+        expected.add(new int[]{1});
+        expected.add(new int[]{2});
+
+        ArrayList<int[]> transposed = EmbeddingBag.transposeExplicit(explicit, 10);
+        assertEquals(transposed.size(), 10);
+
+        for (int i = 0; i < transposed.size(); i++) {
+            assertArrayEquals(transposed.get(i), expected.get(i));
+        }
+
+
+
     }
 
 }
