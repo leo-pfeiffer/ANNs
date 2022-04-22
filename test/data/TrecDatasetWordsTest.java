@@ -1,4 +1,4 @@
-package data;
+package test.data;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -6,7 +6,6 @@ import static org.junit.Assert.fail;
 import java.io.IOException;
 import java.util.Random;
 import org.junit.Test;
-import src.data.BagOfWords;
 import src.data.TrecDataset;
 import src.util.FileUtil;
 

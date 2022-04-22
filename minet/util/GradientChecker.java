@@ -30,7 +30,7 @@ public class GradientChecker {
      * @param input a dataset of input with minibatch_size items
      * @param Y a minibatch_size-row matrix which is the ground-truth of X.
      */
-    public static void checkGradient(Layer net, Loss loss, Object input, DoubleMatrix Y) {
+    public static boolean checkGradient(Layer net, Loss loss, Object input, DoubleMatrix Y) {
         /* forward and backward to compute the gradients r.t. X and Y */
         loss.forward(Y, net.forward(input));
         net.backward(loss.backward());
@@ -67,6 +67,8 @@ public class GradientChecker {
             System.out.println("correct backward for weights");
         else
             System.err.println("incorrect backward for weights");
+
+        return pass;
     }
 
     /**

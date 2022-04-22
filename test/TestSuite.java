@@ -1,7 +1,9 @@
-import util.FileUtilTest;
-import data.TrecDatasetWordsTest;
+package test;
+
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
+import test.data.TrecDatasetWordsTest;
+import test.util.FileUtilTest;
 
 /**
  * Test suite for all JUnit tests.
@@ -10,7 +12,8 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses(
         {
                 TrecDatasetWordsTest.class,
-                FileUtilTest.class
+                FileUtilTest.class,
+                EmbeddingBagTest.class
         }
 )
 public class TestSuite {
