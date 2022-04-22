@@ -17,6 +17,7 @@ public class EmbeddingBag implements Layer, java.io.Serializable {
 
     // for backward
     List<int[]> X;  // store input X for computing backward, each element in this list is a sample (an array of word indices).
+    List<int[]> Xt;  // transposed X
     DoubleMatrix gW;    // gradient of W
 
     /**
@@ -39,28 +40,31 @@ public class EmbeddingBag implements Layer, java.io.Serializable {
     public DoubleMatrix forward(Object input) {
         DoubleMatrix X = (DoubleMatrix)input;
         this.X = toExplicit(X);
+        this.Xt = toExplicit(X.transpose());
 
         double[][] y = new double[X.rows][this.W.columns];
 
         for (int i = 0; i < X.rows; i++) {
             for (int j = 0; j < this.W.columns; j++) {
-                y[i][j] = calcElem(i, j);
+                y[i][j] = calcElem(i, j, this.X, this.W);
             }
         }
         return new DoubleMatrix(y);
     }
 
     /**
-     * Compute an element for the final matrix corresponding to the dot product
-     * of `xRow` row of the X matrix and `wCol` column of the W matrix.
-     * @param xRow the row in the X matrix
-     * @param wCol the column in the W matrix
+     * Compute an element as the dot product from an explicit representation (lhs)
+     * and a matrix (rhs).
+     * @param lhsRow the row in the lhs matrix
+     * @param rhsCol the column in the rhs matrix
+     * @param lhs the explicit representation of the lhs matrix
+     * @param rhs the rhs matrix
      * @return dot product of the two vectors
      * */
-    private double calcElem(int xRow, int wCol) {
+    private double calcElem(int lhsRow, int rhsCol, List<int[]> lhs, DoubleMatrix rhs) {
         double sum = 0;
-        for (int i : this.X.get(xRow)) {
-            sum += this.W.get(i, wCol);
+        for (int i : lhs.get(lhsRow)) {
+            sum += rhs.get(i, rhsCol);
         }
         return sum;
     }
@@ -92,7 +96,15 @@ public class EmbeddingBag implements Layer, java.io.Serializable {
 
     @Override
     public DoubleMatrix backward(DoubleMatrix gY) {
-        // YOUR CODE HERE
+        double[][] gWnew = new double[this.W.rows][this.W.columns];
+
+        for (int i = 0; i < this.W.rows; i++) {
+            for (int j = 0; j < this.W.columns; j++) {
+                gWnew[i][j] = calcElem(i, j, this.Xt, gY);
+            }
+        }
+
+        gW.addi(new DoubleMatrix(gWnew));
 
         return null; // there is no need to compute gX as the previous layer of this one is the input layer of the network
     }
