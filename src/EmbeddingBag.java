@@ -34,6 +34,19 @@ public class EmbeddingBag implements Layer, java.io.Serializable {
     }
 
     /**
+     * Create EmbeddingBag layer with initial weight matrix (e.g., GloVe)
+     *
+     * @param vocabSize (int) vocabulary size
+     * @param outdims (int) output of this layer
+     * @param W (DoubleMatrix) initial weight matrix
+     * */
+    public EmbeddingBag(int vocabSize, int outdims, DoubleMatrix W) {
+        this.vocabSize = vocabSize;
+        this.W = W;
+        this.gW = DoubleMatrix.zeros(vocabSize, outdims);
+    }
+
+    /**
      * Forward pass
      * @param input (List<int[]>) input for forward calculation
      * @return a [batchsize x outdims] matrix, each row is the output of a sample in the batch
