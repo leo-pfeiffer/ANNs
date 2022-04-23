@@ -66,6 +66,40 @@ public class EmbeddingBag implements Layer, java.io.Serializable {
         return new DoubleMatrix(y);
     }
 
+    @Override
+    public DoubleMatrix backward(DoubleMatrix gY) {
+        double[][] gWnew = new double[this.W.rows][this.W.columns];
+
+        List<int[]> Xt = transposeExplicit(this.X, this.vocabSize);
+
+        for (int i = 0; i < this.W.rows; i++) {
+            for (int j = 0; j < this.W.columns; j++) {
+                gWnew[i][j] = calcElem(i, j, Xt, gY);
+            }
+        }
+
+        gW.addi(new DoubleMatrix(gWnew));
+
+        return null; // there is no need to compute gX as the previous layer of this one is the input layer of the network
+    }
+
+    @Override
+    public List<DoubleMatrix> getAllWeights(List<DoubleMatrix> weights) {
+        weights.add(W);
+        return weights;
+    }
+
+    @Override
+    public List<DoubleMatrix> getAllGradients(List<DoubleMatrix> grads) {
+        grads.add(gW);
+        return grads;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Embedding: %d rows, %d dims", W.rows, W.columns);
+    }
+
     /**
      * Compute an element as the dot product from an explicit representation (lhs)
      * and a matrix (rhs).
@@ -134,38 +168,5 @@ public class EmbeddingBag implements Layer, java.io.Serializable {
         return transposed;
     }
 
-    @Override
-    public DoubleMatrix backward(DoubleMatrix gY) {
-        double[][] gWnew = new double[this.W.rows][this.W.columns];
-
-        List<int[]> Xt = transposeExplicit(this.X, this.vocabSize);
-
-        for (int i = 0; i < this.W.rows; i++) {
-            for (int j = 0; j < this.W.columns; j++) {
-                gWnew[i][j] = calcElem(i, j, Xt, gY);
-            }
-        }
-
-        gW.addi(new DoubleMatrix(gWnew));
-
-        return null; // there is no need to compute gX as the previous layer of this one is the input layer of the network
-    }
-
-    @Override
-    public List<DoubleMatrix> getAllWeights(List<DoubleMatrix> weights) {
-        weights.add(W);
-        return weights;
-    }
-
-    @Override
-    public List<DoubleMatrix> getAllGradients(List<DoubleMatrix> grads) {
-        grads.add(gW);
-        return grads;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("Embedding: %d rows, %d dims", W.rows, W.columns);
-    }
 
 }
