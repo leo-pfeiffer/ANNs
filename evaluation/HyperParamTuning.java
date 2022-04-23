@@ -18,14 +18,8 @@ public class HyperParamTuning {
         Tuning tuning = new Tuning();
 
         double[] learningRates = new double[]{0.05, 0.1, 0.15};
-        int[] sizeFirst = new int[]{50, 100, 200};
-        int[] sizeOthers = new int[]{50, 200, 400};
-
-//        double[] learningRates = new double[]{0.1, 0.15, 0.2};
-//        int[] patiences = new int[]{3};
-//        int[] sizeFirst = new int[]{50};
-//        int[] sizeOthers = new int[]{50};
-//        int maxNumEpoch = 5;
+        int[] sizeFirst = new int[]{50, 100, 200, 400};
+        int[] sizeOthers = new int[]{50, 100, 200, 400};
 
         int patience = 10;
         int maxNumEpoch = 500;
@@ -35,6 +29,7 @@ public class HyperParamTuning {
         for (double lr : learningRates) {
             for (int sf : sizeFirst) {
                 for (int so : sizeOthers) {
+                    System.out.print("Learning rate: " + lr + "\nSize First: " + sf + "\nSize Others: " + so + "\n");
                     tuning.addSetting(new HyperParams(lr, maxNumEpoch, patience, batchSize, numHidden, sf, so));
                 }
             }
@@ -96,8 +91,7 @@ public class HyperParamTuning {
     }
 
     public static void main(String[] args) {
-//        tunePart1();
-         tunePart2();
+        tunePart1();
+        tunePart2();
     }
-
 }
