@@ -50,7 +50,7 @@ public class HyperParamTuning {
             try {
                 TrecClassifier classifier = new TrecClassifier(42, trainFile, devFile, testFile, param);
                 classifier.load(vocabFile, classesFile);
-                classifier.createNetwork();
+                classifier.createNetwork(classifier.getNetworkP1());
                 classifier.train();
                 double acc = classifier.evaluate();
                 tuning.setAccuracy(acc);
@@ -72,7 +72,7 @@ public class HyperParamTuning {
             try {
                 TrecClassifier classifier = new TrecClassifier(42, trainFile, devFile, testFile, param);
                 classifier.load(vocabFile, classesFile);
-                classifier.createNetworkWithEmbedding();
+                classifier.createNetwork(classifier.getNetworkP2());
                 classifier.train();
                 double acc = classifier.evaluate();
                 tuning.setAccuracy(acc);

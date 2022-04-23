@@ -24,46 +24,42 @@ public class A4Main {
 
         HyperParams params = HyperParamsConfig.PART1.getParams();
 
-        switch (args[0]) {
-            case "part1": {
-                try {
+        try {
+            switch (args[0]) {
+                case "part1": {
                     TrecClassifier classifier = new TrecClassifier(seed, trainFile, devFile, testFile, params);
                     classifier.load(vocabFile, classesFile);
-                    classifier.createNetwork();
+                    classifier.createNetwork(classifier.getNetworkP1());
                     classifier.train();
                     classifier.evaluate();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    System.exit(1);
+                    break;
                 }
-                break;
-            }
-            case "part2": {
-                try {
+                case "part2": {
                     TrecClassifier classifier = new TrecClassifier(seed, trainFile, devFile, testFile, params);
                     classifier.load(vocabFile, classesFile);
-                    classifier.createNetworkWithEmbedding();
+                    classifier.createNetwork(classifier.getNetworkP2());
                     classifier.train();
                     classifier.evaluate();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    System.exit(1);
+                    break;
                 }
-                break;
+                case "part3": {
+                    TrecClassifier classifier = new TrecClassifier(seed, trainFile, devFile, testFile, params);
+                    classifier.load(vocabFile, classesFile);
+                    classifier.createNetwork(classifier.getNetworkP3(vocabFile));
+                    classifier.train();
+                    classifier.evaluate();
+                    break;
+                }
+                case "part4": {
+                    throw new RuntimeException("Not implemented!!");
+                }
+                default: {
+                    throw new IllegalArgumentException("First argument must be one of <part1/part2/part3/part4>.");
+                }
             }
-            case "part3": {
-                throw new RuntimeException("Not implemented!");
-            }
-            case "part4": {
-                throw new RuntimeException("Not implemented!!");
-            }
-            default: {
-                throw new IllegalArgumentException("First argument must be one of <part1/part2/part3/part4>.");
-            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(1);
         }
-
-
-
-
     }
 }

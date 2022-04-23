@@ -2,6 +2,7 @@ package test;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
+import test.data.GloVeTest;
 import test.data.TrecDatasetWordsTest;
 import test.util.FileUtilTest;
 
@@ -13,7 +14,8 @@ import test.util.FileUtilTest;
         {
                 TrecDatasetWordsTest.class,
                 FileUtilTest.class,
-                EmbeddingBagTest.class
+                EmbeddingBagTest.class,
+                GloVeTest.class
         }
 )
 public class TestSuite {

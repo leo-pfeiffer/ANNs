@@ -18,6 +18,7 @@ import org.jblas.DoubleMatrix;
 import org.jblas.util.Logger;
 import src.EmbeddingBag;
 import src.data.BagOfWords;
+import src.data.GloVe;
 import src.data.TrecDataset;
 import src.hyperparam.HyperParams;
 import src.util.FileUtil;
@@ -44,7 +45,7 @@ public class TrecClassifier {
     /**
      * After instantiation:
      * 1. load()
-     * 2. createNetwork()
+     * 2. createNetwork(net)
      * 3. train()
      * 4. evaluate()
      * */
@@ -70,31 +71,54 @@ public class TrecClassifier {
         this.testSet = loadDataset(params, false, rnd, testDataPath, "dev");
     }
 
-    public void createNetwork() {
-        System.out.println("\nCreating network...");
-
-        this.net = new Sequential(new Layer[] {
-                // todo how to specify different size for first layer?
-                new Linear(bagSize, params.getSizeOtherHiddenLayers(), new WeightInitXavier()),
+    /**
+     * Neural Net for Part 1
+     */
+    public Sequential getNetworkP1() {
+        return new Sequential(new Layer[] {
+                new Linear(bagSize, params.getSizeFirstHiddenLayer(), new WeightInitXavier()),
                 new ReLU(),
-                new Linear(params.getSizeOtherHiddenLayers(), numClasses, new WeightInitXavier()),
+                new Linear(params.getSizeFirstHiddenLayer(), params.getSizeOtherHiddenLayers(), new WeightInitXavier()),
+                new ReLU(),
+                new Linear(params.getSizeOtherHiddenLayers(), params.getSizeOtherHiddenLayers(), new WeightInitXavier()),
+                new ReLU(),
+                new Linear(params.getSizeOtherHiddenLayers(), params.getSizeOtherHiddenLayers(), new WeightInitXavier()),
                 new Softmax()});
-
-        this.lossFunc = new CrossEntropy();
-        this.optimizer = new SGD(net, params.getLearningRate());
-        System.out.println(net);
     }
 
-    public void createNetworkWithEmbedding() {
-        System.out.println("\nCreating network...");
-
-        this.net = new Sequential(new Layer[] {
-                // todo how to specify different size for first layer?
-                new EmbeddingBag(bagSize, params.getSizeOtherHiddenLayers(), new WeightInitXavier()),
+    /**
+     * Neural Net for Part 2 with EmbeddingBag.
+     */
+    public Sequential getNetworkP2() {
+        return new Sequential(new Layer[] {
+                new EmbeddingBag(bagSize, params.getSizeFirstHiddenLayer(), new WeightInitXavier()),
                 new ReLU(),
-                new Linear(params.getSizeOtherHiddenLayers(), numClasses, new WeightInitXavier()),
+                new Linear(params.getSizeFirstHiddenLayer(), params.getSizeOtherHiddenLayers(), new WeightInitXavier()),
+                new ReLU(),
+                new Linear(params.getSizeOtherHiddenLayers(), params.getSizeOtherHiddenLayers(), new WeightInitXavier()),
+                new ReLU(),
+                new Linear(params.getSizeOtherHiddenLayers(), params.getSizeOtherHiddenLayers(), new WeightInitXavier()),
                 new Softmax()});
+    }
 
+    /**
+     * Neural Net for Part 2 with GloVe embeddings.
+     */
+    public Sequential getNetworkP3(String glovePath) throws IOException {
+        return new Sequential(new Layer[] {
+                new EmbeddingBag(bagSize, params.getSizeFirstHiddenLayer(), GloVe.fromFile(glovePath)),
+                new ReLU(),
+                new Linear(params.getSizeFirstHiddenLayer(), params.getSizeOtherHiddenLayers(), new WeightInitXavier()),
+                new ReLU(),
+                new Linear(params.getSizeOtherHiddenLayers(), params.getSizeOtherHiddenLayers(), new WeightInitXavier()),
+                new ReLU(),
+                new Linear(params.getSizeOtherHiddenLayers(), params.getSizeOtherHiddenLayers(), new WeightInitXavier()),
+                new Softmax()});
+    }
+
+    public void createNetwork(Layer net) {
+        System.out.println("\nCreating network...");
+        this.net = net;
         this.lossFunc = new CrossEntropy();
         this.optimizer = new SGD(net, params.getLearningRate());
         System.out.println(net);
