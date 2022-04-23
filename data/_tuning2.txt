@@ -16,6 +16,18 @@ patience: 10
 batchSize: 50
 numHiddenLayers: 3
 sizeFirstHiddenLayer: 50
+sizeOtherHiddenLayers: 100
+
+Acc ====> 0.732
+
+=========================
+
+learningRate: 0.05
+maxNumEpochs: 500
+patience: 10
+batchSize: 50
+numHiddenLayers: 3
+sizeFirstHiddenLayer: 50
 sizeOtherHiddenLayers: 200
 
 Acc ====> 0.71
@@ -43,6 +55,18 @@ sizeFirstHiddenLayer: 100
 sizeOtherHiddenLayers: 50
 
 Acc ====> 0.736
+
+=========================
+
+learningRate: 0.05
+maxNumEpochs: 500
+patience: 10
+batchSize: 50
+numHiddenLayers: 3
+sizeFirstHiddenLayer: 100
+sizeOtherHiddenLayers: 100
+
+Acc ====> 0.756
 
 =========================
 
@@ -88,6 +112,18 @@ patience: 10
 batchSize: 50
 numHiddenLayers: 3
 sizeFirstHiddenLayer: 200
+sizeOtherHiddenLayers: 100
+
+Acc ====> 0.734
+
+=========================
+
+learningRate: 0.05
+maxNumEpochs: 500
+patience: 10
+batchSize: 50
+numHiddenLayers: 3
+sizeFirstHiddenLayer: 200
 sizeOtherHiddenLayers: 200
 
 Acc ====> 0.746
@@ -106,6 +142,54 @@ Acc ====> 0.75
 
 =========================
 
+learningRate: 0.05
+maxNumEpochs: 500
+patience: 10
+batchSize: 50
+numHiddenLayers: 3
+sizeFirstHiddenLayer: 400
+sizeOtherHiddenLayers: 50
+
+Acc ====> 0.754
+
+=========================
+
+learningRate: 0.05
+maxNumEpochs: 500
+patience: 10
+batchSize: 50
+numHiddenLayers: 3
+sizeFirstHiddenLayer: 400
+sizeOtherHiddenLayers: 100
+
+Acc ====> 0.756
+
+=========================
+
+learningRate: 0.05
+maxNumEpochs: 500
+patience: 10
+batchSize: 50
+numHiddenLayers: 3
+sizeFirstHiddenLayer: 400
+sizeOtherHiddenLayers: 200
+
+Acc ====> 0.744
+
+=========================
+
+learningRate: 0.05
+maxNumEpochs: 500
+patience: 10
+batchSize: 50
+numHiddenLayers: 3
+sizeFirstHiddenLayer: 400
+sizeOtherHiddenLayers: 400
+
+Acc ====> 0.768
+
+=========================
+
 learningRate: 0.1
 maxNumEpochs: 500
 patience: 10
@@ -113,6 +197,18 @@ batchSize: 50
 numHiddenLayers: 3
 sizeFirstHiddenLayer: 50
 sizeOtherHiddenLayers: 50
+
+Acc ====> 0.75
+
+=========================
+
+learningRate: 0.1
+maxNumEpochs: 500
+patience: 10
+batchSize: 50
+numHiddenLayers: 3
+sizeFirstHiddenLayer: 50
+sizeOtherHiddenLayers: 100
 
 Acc ====> 0.75
 
@@ -160,6 +256,18 @@ patience: 10
 batchSize: 50
 numHiddenLayers: 3
 sizeFirstHiddenLayer: 100
+sizeOtherHiddenLayers: 100
+
+Acc ====> 0.762
+
+=========================
+
+learningRate: 0.1
+maxNumEpochs: 500
+patience: 10
+batchSize: 50
+numHiddenLayers: 3
+sizeFirstHiddenLayer: 100
 sizeOtherHiddenLayers: 200
 
 Acc ====> 0.768
@@ -196,6 +304,18 @@ patience: 10
 batchSize: 50
 numHiddenLayers: 3
 sizeFirstHiddenLayer: 200
+sizeOtherHiddenLayers: 100
+
+Acc ====> 0.766
+
+=========================
+
+learningRate: 0.1
+maxNumEpochs: 500
+patience: 10
+batchSize: 50
+numHiddenLayers: 3
+sizeFirstHiddenLayer: 200
 sizeOtherHiddenLayers: 200
 
 Acc ====> 0.77
@@ -214,6 +334,54 @@ Acc ====> 0.762
 
 =========================
 
+learningRate: 0.1
+maxNumEpochs: 500
+patience: 10
+batchSize: 50
+numHiddenLayers: 3
+sizeFirstHiddenLayer: 400
+sizeOtherHiddenLayers: 50
+
+Acc ====> 0.78
+
+=========================
+
+learningRate: 0.1
+maxNumEpochs: 500
+patience: 10
+batchSize: 50
+numHiddenLayers: 3
+sizeFirstHiddenLayer: 400
+sizeOtherHiddenLayers: 100
+
+Acc ====> 0.764
+
+=========================
+
+learningRate: 0.1
+maxNumEpochs: 500
+patience: 10
+batchSize: 50
+numHiddenLayers: 3
+sizeFirstHiddenLayer: 400
+sizeOtherHiddenLayers: 200
+
+Acc ====> 0.762
+
+=========================
+
+learningRate: 0.1
+maxNumEpochs: 500
+patience: 10
+batchSize: 50
+numHiddenLayers: 3
+sizeFirstHiddenLayer: 400
+sizeOtherHiddenLayers: 400
+
+Acc ====> 0.774
+
+=========================
+
 learningRate: 0.15
 maxNumEpochs: 500
 patience: 10
@@ -223,6 +391,18 @@ sizeFirstHiddenLayer: 50
 sizeOtherHiddenLayers: 50
 
 Acc ====> 0.732
+
+=========================
+
+learningRate: 0.15
+maxNumEpochs: 500
+patience: 10
+batchSize: 50
+numHiddenLayers: 3
+sizeFirstHiddenLayer: 50
+sizeOtherHiddenLayers: 100
+
+Acc ====> 0.776
 
 =========================
 
@@ -268,6 +448,18 @@ patience: 10
 batchSize: 50
 numHiddenLayers: 3
 sizeFirstHiddenLayer: 100
+sizeOtherHiddenLayers: 100
+
+Acc ====> 0.776
+
+=========================
+
+learningRate: 0.15
+maxNumEpochs: 500
+patience: 10
+batchSize: 50
+numHiddenLayers: 3
+sizeFirstHiddenLayer: 100
 sizeOtherHiddenLayers: 200
 
 Acc ====> 0.774
@@ -304,6 +496,18 @@ patience: 10
 batchSize: 50
 numHiddenLayers: 3
 sizeFirstHiddenLayer: 200
+sizeOtherHiddenLayers: 100
+
+Acc ====> 0.772
+
+=========================
+
+learningRate: 0.15
+maxNumEpochs: 500
+patience: 10
+batchSize: 50
+numHiddenLayers: 3
+sizeFirstHiddenLayer: 200
 sizeOtherHiddenLayers: 200
 
 Acc ====> 0.764
@@ -319,6 +523,54 @@ sizeFirstHiddenLayer: 200
 sizeOtherHiddenLayers: 400
 
 * Acc ====> 0.788
+
+=========================
+
+learningRate: 0.15
+maxNumEpochs: 500
+patience: 10
+batchSize: 50
+numHiddenLayers: 3
+sizeFirstHiddenLayer: 400
+sizeOtherHiddenLayers: 50
+
+Acc ====> 0.774
+
+=========================
+
+learningRate: 0.15
+maxNumEpochs: 500
+patience: 10
+batchSize: 50
+numHiddenLayers: 3
+sizeFirstHiddenLayer: 400
+sizeOtherHiddenLayers: 100
+
+Acc ====> 0.786
+
+=========================
+
+learningRate: 0.15
+maxNumEpochs: 500
+patience: 10
+batchSize: 50
+numHiddenLayers: 3
+sizeFirstHiddenLayer: 400
+sizeOtherHiddenLayers: 200
+
+Acc ====> 0.768
+
+=========================
+
+learningRate: 0.15
+maxNumEpochs: 500
+patience: 10
+batchSize: 50
+numHiddenLayers: 3
+sizeFirstHiddenLayer: 400
+sizeOtherHiddenLayers: 400
+
+Acc ====> 0.78
 
 =========================
 
