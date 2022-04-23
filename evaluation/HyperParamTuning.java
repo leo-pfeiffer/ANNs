@@ -18,25 +18,24 @@ public class HyperParamTuning {
         Tuning tuning = new Tuning();
 
         double[] learningRates = new double[]{0.05, 0.1, 0.15};
-        int[] patiences = new int[]{5, 10, 15, 50};
         int[] sizeFirst = new int[]{50, 100, 200};
         int[] sizeOthers = new int[]{50, 200, 400};
+
 //        double[] learningRates = new double[]{0.1, 0.15, 0.2};
 //        int[] patiences = new int[]{3};
 //        int[] sizeFirst = new int[]{50};
 //        int[] sizeOthers = new int[]{50};
 //        int maxNumEpoch = 5;
 
+        int patience = 10;
         int maxNumEpoch = 500;
         int batchSize = 50;
         int numHidden = 3;
 
         for (double lr : learningRates) {
-            for (int p : patiences) {
-                for (int sf : sizeFirst) {
-                    for (int so : sizeOthers) {
-                        tuning.addSetting(new HyperParams(lr, maxNumEpoch, p, batchSize, numHidden, sf, so));
-                    }
+            for (int sf : sizeFirst) {
+                for (int so : sizeOthers) {
+                    tuning.addSetting(new HyperParams(lr, maxNumEpoch, patience, batchSize, numHidden, sf, so));
                 }
             }
         }
