@@ -22,6 +22,7 @@ import src.data.GloVe;
 import src.data.TrecDataset;
 import src.hyperparam.HyperParams;
 import src.util.FileUtil;
+import src.util.Tracker;
 
 public class TrecClassifier {
 
@@ -41,6 +42,8 @@ public class TrecClassifier {
     private Loss lossFunc;
     private Optimizer optimizer;
     private Layer net;
+
+    private final Tracker tracker = new Tracker();
 
     /**
      * After instantiation:
@@ -160,6 +163,9 @@ public class TrecClassifier {
             // evaluate and print performance
             double trainAcc = eval(trainSet);
             double valAcc = eval(devSet);
+            tracker.addLoss(totalLoss);
+            tracker.addTrainAcc(trainAcc);
+            tracker.addDevAcc(valAcc);
             System.out.printf("epoch: %4d\tloss: %5.4f\ttrain-accuracy: %3.4f\tdev-accuracy: %3.4f\n", e, totalLoss, trainAcc, valAcc);
 
             // check termination condition
@@ -239,5 +245,9 @@ public class TrecClassifier {
     public Random getSeededRandom(Integer seed) {
         org.jblas.util.Random.seed(seed);
         return new Random(seed );
+    }
+
+    public Tracker getTracker() {
+        return tracker;
     }
 }

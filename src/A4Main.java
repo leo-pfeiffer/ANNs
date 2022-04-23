@@ -11,7 +11,8 @@ public class A4Main {
      */
     public static void main(String[] args) {
         if (args.length < 6){
-            System.out.println("Usage: java A4Main <part1/part2/part3/part4> <seed> <trainFile> <devFile> <testFile> <vocabFile> <classesFile>");
+            System.out.println("Usage: java A4Main <part1/part2/part3/part4> <seed> <trainFile> " +
+                    "<devFile> <testFile> <vocabFile> <classesFile> [<tracker-output-file>]");
             return;
         }
 
@@ -22,12 +23,16 @@ public class A4Main {
         String vocabFile = args[5];
         String classesFile = args[6];
 
+        String trackerOutputFile = (args.length > 6) ? args[7] : null;
+
         HyperParams params = HyperParamsConfig.PART1.getParams();
+
+        TrecClassifier classifier;
 
         try {
             switch (args[0]) {
                 case "part1": {
-                    TrecClassifier classifier = new TrecClassifier(seed, trainFile, devFile, testFile, params);
+                    classifier = new TrecClassifier(seed, trainFile, devFile, testFile, params);
                     classifier.load(vocabFile, classesFile);
                     classifier.createNetwork(classifier.getNetworkP1());
                     classifier.train();
@@ -35,7 +40,7 @@ public class A4Main {
                     break;
                 }
                 case "part2": {
-                    TrecClassifier classifier = new TrecClassifier(seed, trainFile, devFile, testFile, params);
+                    classifier = new TrecClassifier(seed, trainFile, devFile, testFile, params);
                     classifier.load(vocabFile, classesFile);
                     classifier.createNetwork(classifier.getNetworkP2());
                     classifier.train();
@@ -43,7 +48,7 @@ public class A4Main {
                     break;
                 }
                 case "part3": {
-                    TrecClassifier classifier = new TrecClassifier(seed, trainFile, devFile, testFile, params);
+                    classifier = new TrecClassifier(seed, trainFile, devFile, testFile, params);
                     classifier.load(vocabFile, classesFile);
                     classifier.createNetwork(classifier.getNetworkP3(vocabFile));
                     classifier.train();
@@ -57,6 +62,9 @@ public class A4Main {
                     throw new IllegalArgumentException("First argument must be one of <part1/part2/part3/part4>.");
                 }
             }
+
+            if (trackerOutputFile != null) classifier.getTracker().toCsv(trackerOutputFile);
+
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);
