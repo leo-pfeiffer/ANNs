@@ -27,6 +27,7 @@ public class FileUtil {
         bw.close();
     }
 
+    @SafeVarargs
     public static <T> void listsToCsv(String path, String[] headers, List<T>... lists) throws IOException {
         assert lists.length == headers.length;
         assert lists.length > 0;
@@ -46,8 +47,8 @@ public class FileUtil {
 
         // Write data
         for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < lists.length; j++) {
-                String str = lists[j].get(i).toString();
+            for (List<T> list : lists) {
+                String str = list.get(i).toString();
                 sb.append(escapeSpecialCharacters(str));
                 sb.append(",");
             }

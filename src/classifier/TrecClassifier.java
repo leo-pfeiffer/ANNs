@@ -35,7 +35,6 @@ public class TrecClassifier {
     private TrecDataset testSet;
 
     private int bagSize;
-    private int numClasses;
 
     private final HyperParams params;
 
@@ -66,7 +65,7 @@ public class TrecClassifier {
 
         // input and output dimensions
         this.bagSize = FileUtil.countLinesInFile(vocab);
-        this.numClasses = FileUtil.countLinesInFile(classes);
+        int numClasses = FileUtil.countLinesInFile(classes);
 
         // data sets
         this.trainSet = loadDataset(params, true, rnd, trainDataPath, "train");

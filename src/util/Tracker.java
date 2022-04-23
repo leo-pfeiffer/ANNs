@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Tracker {
-    private ArrayList<Double> loss = new ArrayList<>();
-    private ArrayList<Double> trainAcc = new ArrayList<>();
-    private ArrayList<Double> devAcc = new ArrayList<>();
+    private final ArrayList<Double> loss = new ArrayList<>();
+    private final ArrayList<Double> trainAcc = new ArrayList<>();
+    private final ArrayList<Double> devAcc = new ArrayList<>();
 
     public void addLoss(double loss) {
         this.loss.add(loss);
