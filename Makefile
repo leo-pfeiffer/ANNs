@@ -23,14 +23,25 @@ clean:
 .PHONY: test
 # Run JUnit tests
 test:
-	@java -cp $(CLASSPATH):. org.junit.runner.JUnitCore TestSuite
+	@java -cp $(CLASSPATH):. org.junit.runner.JUnitCore test.TestSuite
 
 
 .PHONY: evaluation
-# Run the evaluation (run experiments, create plots)
+# Run the evaluation script
 evaluation:
-	@java -cp $(CLASSPATH):. ExperimentReaderWriter
 	@python3 evaluation/evaluation.py
+
+
+.PHONY: tuning
+# Run the hyper parameter tuning script
+tuning:
+	@java -cp $(CLASSPATH):. evaluation.HyperParamTuning
+
+
+.PHONY: timing
+# Run the timing script
+timing:
+	@java -cp $(CLASSPATH):. evaluation.Timer
 
 
 .PHONY: help

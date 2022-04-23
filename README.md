@@ -35,6 +35,8 @@ Make sure to compile (`make compile`) the project before using any of the other 
 compile      Compile all java files
 clean        Remove java class files
 test         Run JUnit tests
-evaluation   Run the evaluation (run experiments, create plots)
+evaluation   Run the evaluation script
+tuning       Run the hyper parameter tuning script
+timing       Run the timing script
 help         Print available commands
 ```
