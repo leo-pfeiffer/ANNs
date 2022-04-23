@@ -23,7 +23,7 @@ public class A4Main {
         String vocabFile = args[5];
         String classesFile = args[6];
 
-        String trackerOutputFile = (args.length > 6) ? args[7] : null;
+        String trackerOutputFile = (args.length > 7) ? args[7] : null;
 
         HyperParams params = HyperParamsConfig.PART1.getParams();
 
