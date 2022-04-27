@@ -19,8 +19,8 @@ public class HyperParamTuning {
     public static Tuning getTuning() {
         Tuning tuning = new Tuning();
 
-        double[] learningRates = new double[]{0.05, 0.1, 0.15};
-        int[] sizeFirst = new int[]{50, 100, 200, 400};
+        double[] learningRates = new double[]{0.05, 0.1, 0.15, 0.2};
+        int[] sizeFirst = new int[]{25, 50, 100};
         int[] sizeOthers = new int[]{50, 100, 200, 400};
 
         int patience = 10;
@@ -137,7 +137,7 @@ public class HyperParamTuning {
 
     public static void toFile(String name, Tuning tuning) {
         try {
-            FileUtil.stringToFile("evaluation/out/" + name, tuning.toString());
+            FileUtil.stringToFile("evaluation/out/" + name, tuning.toJson());
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);
