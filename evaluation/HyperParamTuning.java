@@ -1,6 +1,8 @@
 package evaluation;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import src.classifier.TrecClassifier;
 import src.hyperparam.HyperParams;
 import src.hyperparam.Tuning;
@@ -55,7 +57,6 @@ public class HyperParamTuning {
             }
         } while ((param = tuning.getNextSetting()) != null);
 
-        HyperParams optim = tuning.getOptimalParams();
         toFile("tuning1.txt", tuning);
     }
 
@@ -77,8 +78,61 @@ public class HyperParamTuning {
             }
         } while ((param = tuning.getNextSetting()) != null);
 
-        HyperParams optim = tuning.getOptimalParams();
         toFile("tuning2.txt", tuning);
+    }
+
+    public static void tunePart3() {
+
+        String trainFile = "data/part3/train.txt";
+        String devFile = "data/part3/dev.txt";
+        String testFile = "data/part3/test.txt";
+        String vocabFile = "data/part3/vocab.txt";
+        String classesFile = "data/part3/classes.txt";
+
+        Tuning tuning = getTuning();
+        HyperParams param = tuning.getNextSetting();
+        do {
+            try {
+                TrecClassifier classifier = new TrecClassifier(42, trainFile, devFile, testFile, param);
+                classifier.load(vocabFile, classesFile);
+                classifier.createNetwork(classifier.getNetworkP3(vocabFile));
+                classifier.train();
+                double acc = classifier.evaluate();
+                tuning.setAccuracy(acc);
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.exit(1);
+            }
+        } while ((param = tuning.getNextSetting()) != null);
+
+        toFile("tuning3.txt", tuning);
+    }
+
+    public static void tunePart4() {
+
+        String trainFile = "data/part4/output/train.txt";
+        String devFile = "data/part4/output/dev.txt";
+        String testFile = "data/part4/output/test.txt";
+        String vocabFile = "data/part4/output/subset_model.txt";
+        String classesFile = "data/part4/input/classes.txt";
+
+        Tuning tuning = getTuning();
+        HyperParams param = tuning.getNextSetting();
+        do {
+            try {
+                TrecClassifier classifier = new TrecClassifier(42, trainFile, devFile, testFile, param);
+                classifier.load(vocabFile, classesFile);
+                classifier.createNetwork(classifier.getNetworkP4(vocabFile));
+                classifier.train();
+                double acc = classifier.evaluate();
+                tuning.setAccuracy(acc);
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.exit(1);
+            }
+        } while ((param = tuning.getNextSetting()) != null);
+
+        toFile("tuning4.txt", tuning);
     }
 
     public static void toFile(String name, Tuning tuning) {
@@ -90,8 +144,15 @@ public class HyperParamTuning {
         }
     }
 
+    /**
+     * Executes parameter tuning for all four parts in parallel
+     * */
     public static void main(String[] args) {
-        tunePart1();
-        tunePart2();
+        ExecutorService executor = Executors.newCachedThreadPool();
+
+        executor.execute(HyperParamTuning::tunePart1);
+        executor.execute(HyperParamTuning::tunePart2);
+        executor.execute(HyperParamTuning::tunePart3);
+        executor.execute(HyperParamTuning::tunePart4);
     }
 }
