@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import minet.layer.init.*;
 import minet.layer.Layer;
+import org.jblas.ranges.RangeUtils;
 
 /**
  * A class for Embedding bag layers. Feel free to modify this class for your implementation.
@@ -42,7 +43,17 @@ public class EmbeddingBag implements Layer, java.io.Serializable {
      * */
     public EmbeddingBag(int vocabSize, int outdims, DoubleMatrix W) {
         this.vocabSize = vocabSize;
-        this.W = W;
+
+        assert outdims <= W.columns;
+
+        // if outdims smaller than the provided matrix, truncate the weight matrix
+        if (outdims < W.columns) {
+            int[] columns = new int[outdims];
+            for (int i = 0; i < outdims; i++) columns[i] = i;
+            this.W = W.getColumns(columns).dup();
+        } else {
+            this.W = W;
+        }
         this.gW = DoubleMatrix.zeros(vocabSize, outdims);
     }
 
