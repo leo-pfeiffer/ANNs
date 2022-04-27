@@ -18,7 +18,7 @@ import org.jblas.DoubleMatrix;
 import org.jblas.util.Logger;
 import src.EmbeddingBag;
 import src.data.BagOfWords;
-import src.data.GloVe;
+import src.data.PreComputedWordEmbedding;
 import src.data.TrecDataset;
 import src.hyperparam.HyperParams;
 import src.util.FileUtil;
@@ -104,11 +104,11 @@ public class TrecClassifier {
     }
 
     /**
-     * Neural Net for Part 2 with GloVe embeddings.
+     * Neural Net for models with pre-computed weight matrix.
      */
-    public Sequential getNetworkP3(String glovePath) throws IOException {
+    private Sequential getNetworkWithPrecomputed(String embeddingPath) throws IOException {
         return new Sequential(new Layer[] {
-                new EmbeddingBag(bagSize, params.getSizeFirstHiddenLayer(), GloVe.fromFile(glovePath)),
+                new EmbeddingBag(bagSize, params.getSizeFirstHiddenLayer(), PreComputedWordEmbedding.fromFile(embeddingPath)),
                 new ReLU(),
                 new Linear(params.getSizeFirstHiddenLayer(), params.getSizeOtherHiddenLayers(), new WeightInitXavier()),
                 new ReLU(),
@@ -116,6 +116,21 @@ public class TrecClassifier {
                 new ReLU(),
                 new Linear(params.getSizeOtherHiddenLayers(), params.getSizeOtherHiddenLayers(), new WeightInitXavier()),
                 new Softmax()});
+    }
+
+
+    /**
+     * Neural Net for Part 3 with GloVe embeddings.
+     */
+    public Sequential getNetworkP3(String glovePath) throws IOException {
+        return getNetworkWithPrecomputed(glovePath);
+    }
+
+    /**
+     * Neural Net for Part 4 with word2vec embeddings.
+     */
+    public Sequential getNetworkP4(String word2vecPath) throws IOException {
+        return getNetworkWithPrecomputed(word2vecPath);
     }
 
     public void createNetwork(Layer net) {

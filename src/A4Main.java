@@ -56,7 +56,12 @@ public class A4Main {
                     break;
                 }
                 case "part4": {
-                    throw new RuntimeException("Not implemented!!");
+                    classifier = new TrecClassifier(seed, trainFile, devFile, testFile, params);
+                    classifier.load(vocabFile, classesFile);
+                    classifier.createNetwork(classifier.getNetworkP4(vocabFile));
+                    classifier.train();
+                    classifier.evaluate();
+                    break;
                 }
                 default: {
                     throw new IllegalArgumentException("First argument must be one of <part1/part2/part3/part4>.");
