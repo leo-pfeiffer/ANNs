@@ -1,0 +1,489 @@
+{
+  "settings": [
+    {
+      "learningRate": 0.05,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 25,
+      "sizeOtherHiddenLayers": 50
+    },
+    {
+      "learningRate": 0.05,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 25,
+      "sizeOtherHiddenLayers": 100
+    },
+    {
+      "learningRate": 0.05,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 25,
+      "sizeOtherHiddenLayers": 200
+    },
+    {
+      "learningRate": 0.05,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 25,
+      "sizeOtherHiddenLayers": 400
+    },
+    {
+      "learningRate": 0.05,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 50,
+      "sizeOtherHiddenLayers": 50
+    },
+    {
+      "learningRate": 0.05,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 50,
+      "sizeOtherHiddenLayers": 100
+    },
+    {
+      "learningRate": 0.05,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 50,
+      "sizeOtherHiddenLayers": 200
+    },
+    {
+      "learningRate": 0.05,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 50,
+      "sizeOtherHiddenLayers": 400
+    },
+    {
+      "learningRate": 0.05,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 100,
+      "sizeOtherHiddenLayers": 50
+    },
+    {
+      "learningRate": 0.05,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 100,
+      "sizeOtherHiddenLayers": 100
+    },
+    {
+      "learningRate": 0.05,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 100,
+      "sizeOtherHiddenLayers": 200
+    },
+    {
+      "learningRate": 0.05,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 100,
+      "sizeOtherHiddenLayers": 400
+    },
+    {
+      "learningRate": 0.1,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 25,
+      "sizeOtherHiddenLayers": 50
+    },
+    {
+      "learningRate": 0.1,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 25,
+      "sizeOtherHiddenLayers": 100
+    },
+    {
+      "learningRate": 0.1,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 25,
+      "sizeOtherHiddenLayers": 200
+    },
+    {
+      "learningRate": 0.1,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 25,
+      "sizeOtherHiddenLayers": 400
+    },
+    {
+      "learningRate": 0.1,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 50,
+      "sizeOtherHiddenLayers": 50
+    },
+    {
+      "learningRate": 0.1,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 50,
+      "sizeOtherHiddenLayers": 100
+    },
+    {
+      "learningRate": 0.1,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 50,
+      "sizeOtherHiddenLayers": 200
+    },
+    {
+      "learningRate": 0.1,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 50,
+      "sizeOtherHiddenLayers": 400
+    },
+    {
+      "learningRate": 0.1,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 100,
+      "sizeOtherHiddenLayers": 50
+    },
+    {
+      "learningRate": 0.1,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 100,
+      "sizeOtherHiddenLayers": 100
+    },
+    {
+      "learningRate": 0.1,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 100,
+      "sizeOtherHiddenLayers": 200
+    },
+    {
+      "learningRate": 0.1,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 100,
+      "sizeOtherHiddenLayers": 400
+    },
+    {
+      "learningRate": 0.15,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 25,
+      "sizeOtherHiddenLayers": 50
+    },
+    {
+      "learningRate": 0.15,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 25,
+      "sizeOtherHiddenLayers": 100
+    },
+    {
+      "learningRate": 0.15,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 25,
+      "sizeOtherHiddenLayers": 200
+    },
+    {
+      "learningRate": 0.15,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 25,
+      "sizeOtherHiddenLayers": 400
+    },
+    {
+      "learningRate": 0.15,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 50,
+      "sizeOtherHiddenLayers": 50
+    },
+    {
+      "learningRate": 0.15,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 50,
+      "sizeOtherHiddenLayers": 100
+    },
+    {
+      "learningRate": 0.15,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 50,
+      "sizeOtherHiddenLayers": 200
+    },
+    {
+      "learningRate": 0.15,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 50,
+      "sizeOtherHiddenLayers": 400
+    },
+    {
+      "learningRate": 0.15,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 100,
+      "sizeOtherHiddenLayers": 50
+    },
+    {
+      "learningRate": 0.15,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 100,
+      "sizeOtherHiddenLayers": 100
+    },
+    {
+      "learningRate": 0.15,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 100,
+      "sizeOtherHiddenLayers": 200
+    },
+    {
+      "learningRate": 0.15,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 100,
+      "sizeOtherHiddenLayers": 400
+    },
+    {
+      "learningRate": 0.2,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 25,
+      "sizeOtherHiddenLayers": 50
+    },
+    {
+      "learningRate": 0.2,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 25,
+      "sizeOtherHiddenLayers": 100
+    },
+    {
+      "learningRate": 0.2,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 25,
+      "sizeOtherHiddenLayers": 200
+    },
+    {
+      "learningRate": 0.2,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 25,
+      "sizeOtherHiddenLayers": 400
+    },
+    {
+      "learningRate": 0.2,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 50,
+      "sizeOtherHiddenLayers": 50
+    },
+    {
+      "learningRate": 0.2,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 50,
+      "sizeOtherHiddenLayers": 100
+    },
+    {
+      "learningRate": 0.2,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 50,
+      "sizeOtherHiddenLayers": 200
+    },
+    {
+      "learningRate": 0.2,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 50,
+      "sizeOtherHiddenLayers": 400
+    },
+    {
+      "learningRate": 0.2,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 100,
+      "sizeOtherHiddenLayers": 50
+    },
+    {
+      "learningRate": 0.2,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 100,
+      "sizeOtherHiddenLayers": 100
+    },
+    {
+      "learningRate": 0.2,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 100,
+      "sizeOtherHiddenLayers": 200
+    },
+    {
+      "learningRate": 0.2,
+      "maxNumEpochs": 500,
+      "patience": 10,
+      "batchSize": 50,
+      "numHiddenLayers": 3,
+      "sizeFirstHiddenLayer": 100,
+      "sizeOtherHiddenLayers": 400
+    }
+  ],
+  "vals": {
+    "0": 0.74,
+    "1": 0.006,
+    "2": 0.246,
+    "3": 0.726,
+    "4": 0.688,
+    "5": 0.74,
+    "6": 0.72,
+    "7": 0.716,
+    "8": 0.742,
+    "9": 0.734,
+    "10": 0.032,
+    "11": 0.016,
+    "12": 0.742,
+    "13": 0.732,
+    "14": 0.746,
+    "15": 0.74,
+    "16": 0.014,
+    "17": 0.64,
+    "18": 0.76,
+    "19": 0.036,
+    "20": 0.77,
+    "21": 0.762,
+    "22": 0.764,
+    "23": 0.706,
+    "24": 0.758,
+    "25": 0.708,
+    "26": 0.744,
+    "27": 0.006,
+    "28": 0.776,
+    "29": 0.778,
+    "30": 0.748,
+    "31": 0.76,
+    "32": 0.784,
+    "33": 0.762,
+    "34": 0.772,
+    "35": 0.0,
+    "36": 0.72,
+    "37": 0.11,
+    "38": 0.004,
+    "39": 0.006,
+    "40": 0.006,
+    "41": 0.772,
+    "42": 0.11,
+    "43": 0.74,
+    "44": 0.0,
+    "45": 0.11,
+    "46": 0.032,
+    "47": 0.77
+  },
+  "current": 48,
+  "best": 32,
+  "maxAcc": 0.784
+}
