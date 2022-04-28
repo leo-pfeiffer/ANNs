@@ -67,8 +67,8 @@ public class Timer {
     }
 
     public static void main(String[] args) {
-        List<Integer> sizes = Arrays.asList(10, 100, 1000, 10000, 100000, 1000000);
-        List<Double> sizesD = Arrays.asList(10., 100., 1000., 10000., 100000., 1000000.);
+        List<Integer> sizes = Arrays.asList(10, 100, 1000, 10000, 100000);
+        List<Double> sizesD = Arrays.asList(10., 100., 1000., 10000., 100000.);
         List<Double> times1 = new ArrayList<>();
         List<Double> times2 = new ArrayList<>();
         for (Integer s : sizes) {
