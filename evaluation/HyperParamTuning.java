@@ -150,6 +150,7 @@ public class HyperParamTuning {
     public static void main(String[] args) {
         ExecutorService executor = Executors.newCachedThreadPool();
 
+        // execute in parallel
         executor.execute(HyperParamTuning::tunePart1);
         executor.execute(HyperParamTuning::tunePart2);
         executor.execute(HyperParamTuning::tunePart3);

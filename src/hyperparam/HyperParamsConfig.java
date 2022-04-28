@@ -1,13 +1,12 @@
 package src.hyperparam;
 
 public enum HyperParamsConfig {
-    PART1(0.1,
-            500,
-            10,
-            50,
-            3,
-            100,
-            200);
+    PART1(0.1, 500, 10, 50, 3, 100, 200),
+    TUNED1(0.2, 500, 10, 50, 3, 100, 100),
+    TUNED2(0.15, 500, 10, 50, 3, 100, 50),
+    TUNED3(0.2, 500, 10, 50, 3, 100, 400),
+    TUNED4(0.2, 500, 10, 50, 3, 50, 400)
+    ;
 
     final HyperParams params;
 
