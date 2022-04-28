@@ -1,6 +1,9 @@
 package evaluation;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import minet.layer.Layer;
 import minet.layer.Linear;
@@ -8,6 +11,7 @@ import minet.layer.Sequential;
 import minet.layer.init.WeightInitUniform;
 import org.jblas.DoubleMatrix;
 import src.EmbeddingBag;
+import src.util.FileUtil;
 
 public class Timer {
 
@@ -28,7 +32,7 @@ public class Timer {
         return new DoubleMatrix(mat);
     }
 
-    public static void withDimension(int outDims, int numExp, int numSamples, int vocabSize) {
+    public static double[] withDimension(int outDims, int numExp, int numSamples, int vocabSize) {
         Sequential net1 = new Sequential(new Layer[] {
                 new Linear(vocabSize, outDims, new WeightInitUniform(-1, 1)),
         });
@@ -58,10 +62,32 @@ public class Timer {
 
         System.out.println("Net 1: " + s1 / numExp);
         System.out.println("Net 2: " + s2 / numExp);
+
+        return new double[] {s1 / (double) numExp, s2 / (double) numExp};
     }
 
     public static void main(String[] args) {
-        Timer.withDimension(100, 50, 100, 100000);
+        List<Integer> sizes = Arrays.asList(10, 100, 1000, 10000, 100000, 1000000);
+        List<Double> sizesD = Arrays.asList(10., 100., 1000., 10000., 100000., 1000000.);
+        List<Double> times1 = new ArrayList<>();
+        List<Double> times2 = new ArrayList<>();
+        for (Integer s : sizes) {
+            double[] times = Timer.withDimension(500, 50, 300, s);
+            times1.add(times[0]);
+            times2.add(times[1]);
+        }
+        try {
+            FileUtil.listsToCsv(
+                    "evaluation/out/timer.csv",
+                    new String[]{"Sample size", "Part 1", "Part 2"},
+                    sizesD,
+                    times1,
+                    times2
+            );
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
     }
 
 }
