@@ -18,15 +18,8 @@ import src.EmbeddingBag;
 
 public class EmbeddingBagTest {
 
-    static {
-        org.jblas.util.Random.seed(42);
-    }
-    Random rnd = new Random(42);
-
     @Test
     public void testGradient() {
-        // todo not sure if this is correct
-
         DoubleMatrix X = new DoubleMatrix(
                 new double[][] {
                         {0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
@@ -41,6 +34,44 @@ public class EmbeddingBagTest {
         CrossEntropy loss = new CrossEntropy();
         boolean pass = GradientChecker.checkGradient(net, loss, X, Y);
         assertTrue(pass);
+    }
+
+    @Test
+    public void testGradientRandom() {
+
+        Random rnd = new Random();
+
+        int maxSampSize = 50;
+        int maxVocabSize = 30;
+
+        int numIt = 100;
+        for (int i = 0; i < numIt; i++) {
+            int vocabSize = rnd.nextInt(maxVocabSize) + 1;
+            int sampSize = rnd.nextInt(maxSampSize) + 1;
+
+            double[][] x = new double[sampSize][];
+            double[] y = new double[sampSize];
+
+            for (int j = 0; j < sampSize; j++) {
+                double[] row = new double[vocabSize];
+                y[j] = rnd.nextInt(vocabSize);
+                for (int k = 0; k < vocabSize; k++) {
+                    row[k] = rnd.nextInt(2);
+                }
+                x[j] = row;
+            }
+
+            DoubleMatrix X = new DoubleMatrix(x);
+            DoubleMatrix Y = new DoubleMatrix(y);
+
+            Sequential net = new Sequential(new Layer[] {
+                    new EmbeddingBag(vocabSize, 100, new WeightInitUniform(-1, 1)),
+            });
+
+            CrossEntropy loss = new CrossEntropy();
+            boolean pass = GradientChecker.checkGradient(net, loss, X, Y);
+            assertTrue(pass);
+        }
     }
 
     @Test
