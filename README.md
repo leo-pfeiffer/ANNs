@@ -6,20 +6,18 @@ The report can be found in `doc/report.pdf`.
 
 ## Running the project
 
-Running the project (without tests etc.):
-```bash
-todo
-```
+Running instructions for the models are provided in `run.sh`.
 
-To run the unit tests and the evaluation, please refer to
-the commands provided in the Makefile (see below).
+To run the unit tests, word2vec scripts and the evaluation, please refer to
+the commands provided in the Makefile (see below) and the report.
 
 ## Project structure
 
 ```
-+ doc:          Report, test coverage, etc.
++ data:         Data for models
 + evaluation:   Evaluation scripts
 + lib:          Dependencies (for unit testing and evaluation)
++ minet:        From starter code
 + src:          Source code
 + test:         Unit tests
 ```
