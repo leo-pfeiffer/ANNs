@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import minet.layer.init.*;
 import minet.layer.Layer;
-import org.jblas.ranges.RangeUtils;
 
 /**
  * A class for Embedding bag layers. Feel free to modify this class for your implementation.
@@ -120,7 +119,7 @@ public class EmbeddingBag implements Layer, java.io.Serializable {
      * @param rhs the rhs matrix
      * @return dot product of the two vectors
      * */
-    private double calcElem(int lhsRow, int rhsCol, List<int[]> lhs, DoubleMatrix rhs) {
+    public static double calcElem(int lhsRow, int rhsCol, List<int[]> lhs, DoubleMatrix rhs) {
         double sum = 0;
         for (int i : lhs.get(lhsRow)) {
             sum += rhs.get(i, rhsCol);
@@ -137,7 +136,7 @@ public class EmbeddingBag implements Layer, java.io.Serializable {
      * @param X the boolean matrix
      * @return explicit representation
      * */
-    private List<int[]> toExplicit(DoubleMatrix X) {
+    public static List<int[]> toExplicit(DoubleMatrix X) {
         ArrayList<int[]> explicit = new ArrayList<>(X.rows);
         for (int i = 0; i < X.rows; i++) {
             int[] row = new int[(int) X.getRow(i).sum()];

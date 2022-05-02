@@ -29,6 +29,7 @@ public class TrecDataset extends Dataset<BagOfWords, Integer> {
     public int getInputDims() {
         return inputDims;
     }
+
     @Override
     public void fromFile(String path) throws IOException {
         // Input data file:

@@ -17,6 +17,5 @@ public class FileUtilTest {
         } catch (IOException e) {
             fail(e.getMessage());
         }
-
     }
 }
