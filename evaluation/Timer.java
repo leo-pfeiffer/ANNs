@@ -32,7 +32,7 @@ public class Timer {
         return new DoubleMatrix(mat);
     }
 
-    public static double[] withDimension(int outDims, int numExp, int numSamples, int vocabSize) {
+    public static long[][] withDimension(int outDims, int numExp, int numSamples, int vocabSize) {
         Sequential net1 = new Sequential(new Layer[] {
                 new Linear(vocabSize, outDims, new WeightInitUniform(-1, 1)),
         });
@@ -63,18 +63,18 @@ public class Timer {
         System.out.println("Net 1: " + s1 / numExp);
         System.out.println("Net 2: " + s2 / numExp);
 
-        return new double[] {s1 / (double) numExp, s2 / (double) numExp};
+        return new long[][] {times1, times2};
     }
 
     public static void main(String[] args) {
         List<Integer> sizes = Arrays.asList(10, 100, 1000, 10000, 100000);
-        List<Double> sizesD = Arrays.asList(10., 100., 1000., 10000., 100000.);
-        List<Double> times1 = new ArrayList<>();
-        List<Double> times2 = new ArrayList<>();
+        List<Long> sizesD = Arrays.asList(10L, 100L, 1000L, 10000L, 100000L);
+        List<Long> times1 = new ArrayList<>();
+        List<Long> times2 = new ArrayList<>();
         for (Integer s : sizes) {
-            double[] times = Timer.withDimension(500, 50, 300, s);
-            times1.add(times[0]);
-            times2.add(times[1]);
+            long[][] times = Timer.withDimension(500, 50, 300, s);
+            for (Long l : times[0]) times1.add(l);
+            for (Long l : times[1]) times2.add(l);
         }
         try {
             FileUtil.listsToCsv(

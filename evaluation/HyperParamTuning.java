@@ -57,7 +57,7 @@ public class HyperParamTuning {
             }
         } while ((param = tuning.getNextSetting()) != null);
 
-        toFile("tuning1.txt", tuning);
+        toFile("_tuning1.json", tuning);
     }
 
     // should give same result as part 1
@@ -78,7 +78,7 @@ public class HyperParamTuning {
             }
         } while ((param = tuning.getNextSetting()) != null);
 
-        toFile("tuning2.txt", tuning);
+        toFile("_tuning2.json", tuning);
     }
 
     public static void tunePart3() {
@@ -105,7 +105,7 @@ public class HyperParamTuning {
             }
         } while ((param = tuning.getNextSetting()) != null);
 
-        toFile("tuning3.txt", tuning);
+        toFile("_tuning3.json", tuning);
     }
 
     public static void tunePart4() {
@@ -132,7 +132,7 @@ public class HyperParamTuning {
             }
         } while ((param = tuning.getNextSetting()) != null);
 
-        toFile("tuning4.txt", tuning);
+        toFile("_tuning4.json", tuning);
     }
 
     public static void toFile(String name, Tuning tuning) {
