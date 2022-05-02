@@ -1,0 +1,2 @@
+# use this when running word2vec.py
+gensim~=4.1.2

@@ -1,0 +1,4 @@
+# use this when running evaluation.py
+pandas==1.2.5
+matplotlib==3.4.2
+seaborn==0.11.1

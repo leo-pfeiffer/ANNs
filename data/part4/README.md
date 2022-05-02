@@ -1,7 +1,7 @@
 # README for PART 4
 
 Note: to run the python script, install the dependencies specified in 
-`requirements.txt` in the root directory.
+`word2vec-requirements.txt` in the root directory.
 
 This directory contains the script (`word2vec.py`) extracts a subset from the 
 Google News word2vec file. The resulting vocabulary contains all words
