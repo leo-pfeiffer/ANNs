@@ -68,13 +68,14 @@ public class Timer {
 
     public static void main(String[] args) {
         List<Integer> sizes = Arrays.asList(10, 100, 1000, 10000, 100000);
-        List<Long> sizesD = Arrays.asList(10L, 100L, 1000L, 10000L, 100000L);
         List<Long> times1 = new ArrayList<>();
         List<Long> times2 = new ArrayList<>();
+        List<Long> sizesD = new ArrayList<>();
         for (Integer s : sizes) {
             long[][] times = Timer.withDimension(500, 50, 300, s);
             for (Long l : times[0]) times1.add(l);
             for (Long l : times[1]) times2.add(l);
+            for (Long ignored : times[0]) sizesD.add(s.longValue());
         }
         try {
             FileUtil.listsToCsv(
