@@ -1,8 +1,5 @@
 package src.data;
 
-import java.io.IOException;
-import src.util.FileUtil;
-
 /**
  * Wrapper around int[] representing a bag of words.
  * All elements of the bag are either 0 or 1.
@@ -24,7 +21,7 @@ public class BagOfWords {
      * Create a bag of words from a list of tokens given the bag size.
      * @return bag of words
      */
-    private int[] createBag() {
+    public int[] createBag() {
         int[] bagOfWords = new int[bagSize];
         for (int token : tokens) {
             bagOfWords[token] = 1;
