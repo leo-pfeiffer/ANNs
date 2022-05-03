@@ -80,7 +80,7 @@ public class Timer {
         try {
             FileUtil.listsToCsv(
                     "evaluation/out/timer.csv",
-                    new String[]{"Sample size", "Part 1", "Part 2"},
+                    new String[]{"Vocab size", "Part 1", "Part 2"},
                     sizesD,
                     times1,
                     times2
