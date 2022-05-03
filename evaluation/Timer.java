@@ -33,11 +33,11 @@ public class Timer {
     }
 
     public static long[][] withDimension(int outDims, int numExp, int numSamples, int vocabSize) {
-        Sequential net1 = new Sequential(new Layer[] {
+        Sequential net1 = new Sequential(new Layer[]{
                 new Linear(vocabSize, outDims, new WeightInitUniform(-1, 1)),
         });
 
-        Sequential net2 = new Sequential(new Layer[] {
+        Sequential net2 = new Sequential(new Layer[]{
                 new EmbeddingBag(vocabSize, outDims, new WeightInitUniform(-1, 1)),
         });
 
@@ -63,7 +63,7 @@ public class Timer {
         System.out.println("Net 1: " + s1 / numExp);
         System.out.println("Net 2: " + s2 / numExp);
 
-        return new long[][] {times1, times2};
+        return new long[][]{times1, times2};
     }
 
     public static void main(String[] args) {

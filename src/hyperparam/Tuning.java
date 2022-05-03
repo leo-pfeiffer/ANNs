@@ -14,11 +14,12 @@ public class Tuning {
     int best = -1;
     double maxAcc = 0.0;
 
-    public Tuning() {}
+    public Tuning() {
+    }
 
     public void addSetting(HyperParams setting) {
         settings.add(setting);
-        vals.put(settings.size()-1, null);
+        vals.put(settings.size() - 1, null);
     }
 
     public void reset() {
@@ -35,9 +36,9 @@ public class Tuning {
     public void setAccuracy(double accuracy) {
         if (accuracy > this.maxAcc) {
             this.maxAcc = accuracy;
-            this.best = current-1;
+            this.best = current - 1;
         }
-        this.vals.put(current-1, accuracy);
+        this.vals.put(current - 1, accuracy);
     }
 
     public String toString() {

@@ -21,13 +21,13 @@ public class EmbeddingBagTest {
     @Test
     public void testGradient() {
         DoubleMatrix X = new DoubleMatrix(
-                new double[][] {
+                new double[][]{
                         {0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
                         {1, 0, 1, 0, 0, 0, 0, 0, 1, 0},
                         {1, 0, 0, 0, 0, 0, 1, 0, 0, 1}
                 });
-        DoubleMatrix Y = new DoubleMatrix(new double[] {1, 3, 5});
-        Sequential net = new Sequential(new Layer[] {
+        DoubleMatrix Y = new DoubleMatrix(new double[]{1, 3, 5});
+        Sequential net = new Sequential(new Layer[]{
                 new EmbeddingBag(10, 100, new WeightInitUniform(-1, 1)),
         });
 
@@ -64,7 +64,7 @@ public class EmbeddingBagTest {
             DoubleMatrix X = new DoubleMatrix(x);
             DoubleMatrix Y = new DoubleMatrix(y);
 
-            Sequential net = new Sequential(new Layer[] {
+            Sequential net = new Sequential(new Layer[]{
                     new EmbeddingBag(vocabSize, 100, new WeightInitUniform(-1, 1)),
             });
 
@@ -142,7 +142,7 @@ public class EmbeddingBagTest {
     @Test
     public void testToExplicit() {
         DoubleMatrix X = new DoubleMatrix(
-                new double[][] {
+                new double[][]{
                         {0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
                         {1, 0, 1, 0, 0, 0, 0, 0, 1, 0},
                         {1, 0, 0, 0, 0, 0, 1, 0, 0, 1}
@@ -158,7 +158,7 @@ public class EmbeddingBagTest {
     @Test
     public void testToExplicitEmpty() {
         DoubleMatrix X = new DoubleMatrix(
-                new double[][] {
+                new double[][]{
                         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
@@ -175,7 +175,7 @@ public class EmbeddingBagTest {
     public void testCalcElem() {
 
         DoubleMatrix X = new DoubleMatrix(
-                new double[][] {
+                new double[][]{
                         {1, 0},
                         {1, 1},
                         {0, 1},
@@ -183,14 +183,14 @@ public class EmbeddingBagTest {
                 });
 
         DoubleMatrix Y = new DoubleMatrix(
-                new double[][] {
+                new double[][]{
                         {1, 2, 3, 4},
                         {5, 6, 7, 8},
                 });
 
         List<int[]> explicit = EmbeddingBag.toExplicit(X);
 
-        double[][] expected = new double[][] {
+        double[][] expected = new double[][]{
                 new double[]{1, 2, 3, 4},
                 new double[]{6, 8, 10, 12},
                 new double[]{5, 6, 7, 8},

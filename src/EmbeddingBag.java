@@ -1,19 +1,19 @@
 package src;
 
-import org.jblas.*;
 import java.util.ArrayList;
 import java.util.List;
-import minet.layer.init.*;
 import minet.layer.Layer;
+import minet.layer.init.WeightInit;
+import org.jblas.DoubleMatrix;
 
 /**
  * A class for Embedding bag layers. Feel free to modify this class for your implementation.
  */
-public class EmbeddingBag implements Layer, java.io.Serializable {			
+public class EmbeddingBag implements Layer, java.io.Serializable {
 
-	private static final long serialVersionUID = -10445336293457309L;
-	
-	DoubleMatrix W;  // weight matrix (for simplicity, we can ignore the bias term b)
+    private static final long serialVersionUID = -10445336293457309L;
+
+    DoubleMatrix W;  // weight matrix (for simplicity, we can ignore the bias term b)
 
     int vocabSize;
 
@@ -24,8 +24,8 @@ public class EmbeddingBag implements Layer, java.io.Serializable {
     /**
      * Constructor for EmbeddingBag
      * @param vocabSize (int) vocabulary size
-     * @param outdims (int) output of this layer
-     * @param wInit (WeightInit) weight initialisation method
+     * @param outdims   (int) output of this layer
+     * @param wInit     (WeightInit) weight initialisation method
      */
     public EmbeddingBag(int vocabSize, int outdims, WeightInit wInit) {
         this.vocabSize = vocabSize;
@@ -35,11 +35,10 @@ public class EmbeddingBag implements Layer, java.io.Serializable {
 
     /**
      * Create EmbeddingBag layer with initial weight matrix (e.g., GloVe)
-     *
      * @param vocabSize (int) vocabulary size
-     * @param outdims (int) output of this layer
-     * @param W (DoubleMatrix) initial weight matrix
-     * */
+     * @param outdims   (int) output of this layer
+     * @param W         (DoubleMatrix) initial weight matrix
+     */
     public EmbeddingBag(int vocabSize, int outdims, DoubleMatrix W) {
         this.vocabSize = vocabSize;
 
@@ -57,13 +56,80 @@ public class EmbeddingBag implements Layer, java.io.Serializable {
     }
 
     /**
+     * Compute an element as the dot product from an explicit representation (lhs)
+     * and a matrix (rhs).
+     * @param lhsRow the row in the lhs matrix
+     * @param rhsCol the column in the rhs matrix
+     * @param lhs    the explicit representation of the lhs matrix
+     * @param rhs    the rhs matrix
+     * @return dot product of the two vectors
+     */
+    public static double calcElem(int lhsRow, int rhsCol, List<int[]> lhs, DoubleMatrix rhs) {
+        double sum = 0;
+        for (int i : lhs.get(lhsRow)) {
+            sum += rhs.get(i, rhsCol);
+        }
+        return sum;
+    }
+
+    /**
+     * Convert a binary matrix (domain {0, 1}) to explicit representation.
+     * The representation is a list of integer arrays. Each array corresponds to a row
+     * of the original matrix and the elements of the array are the indices in the original
+     * row where the element is 1.
+     * @param X the boolean matrix
+     * @return explicit representation
+     */
+    public static List<int[]> toExplicit(DoubleMatrix X) {
+        ArrayList<int[]> explicit = new ArrayList<>(X.rows);
+        for (int i = 0; i < X.rows; i++) {
+            int[] row = new int[(int) X.getRow(i).sum()];
+            int idx = 0;
+            for (int j = 0; j < X.columns; j++) {
+                if (X.get(i, j) == 1) {
+                    row[idx] = j;
+                    idx++;
+                }
+            }
+            explicit.add(row);
+        }
+        return explicit;
+    }
+
+    // transpose explicit
+    public static ArrayList<int[]> transposeExplicit(List<int[]> explicit, int vocabSize) {
+
+        ArrayList<List<Integer>> transposedList = new ArrayList<>(vocabSize);
+
+        // init
+        for (int i = 0; i < vocabSize; i++) transposedList.add(new ArrayList<>());
+
+        // transpose
+        for (int i = 0; i < explicit.size(); i++) {
+            for (int j : explicit.get(i)) {
+                transposedList.get(j).add(i);
+            }
+        }
+
+        // convert to array
+        ArrayList<int[]> transposed = new ArrayList<>(vocabSize);
+        for (List<Integer> list : transposedList) {
+            int[] array = new int[list.size()];
+            for (int j = 0; j < list.size(); j++) array[j] = list.get(j);
+            transposed.add(array);
+        }
+
+        return transposed;
+    }
+
+    /**
      * Forward pass
      * @param input (List<int[]>) input for forward calculation
      * @return a [batchsize x outdims] matrix, each row is the output of a sample in the batch
      */
     @Override
     public DoubleMatrix forward(Object input) {
-        DoubleMatrix X = (DoubleMatrix)input;
+        DoubleMatrix X = (DoubleMatrix) input;
         this.X = toExplicit(X);
 
         double[][] y = new double[X.rows][this.W.columns];
@@ -108,74 +174,6 @@ public class EmbeddingBag implements Layer, java.io.Serializable {
     @Override
     public String toString() {
         return String.format("Embedding: %d rows, %d dims", W.rows, W.columns);
-    }
-
-    /**
-     * Compute an element as the dot product from an explicit representation (lhs)
-     * and a matrix (rhs).
-     * @param lhsRow the row in the lhs matrix
-     * @param rhsCol the column in the rhs matrix
-     * @param lhs the explicit representation of the lhs matrix
-     * @param rhs the rhs matrix
-     * @return dot product of the two vectors
-     * */
-    public static double calcElem(int lhsRow, int rhsCol, List<int[]> lhs, DoubleMatrix rhs) {
-        double sum = 0;
-        for (int i : lhs.get(lhsRow)) {
-            sum += rhs.get(i, rhsCol);
-        }
-        return sum;
-    }
-
-    /**
-     * Convert a binary matrix (domain {0, 1}) to explicit representation.
-     * The representation is a list of integer arrays. Each array corresponds to a row
-     * of the original matrix and the elements of the array are the indices in the original
-     * row where the element is 1.
-     *
-     * @param X the boolean matrix
-     * @return explicit representation
-     * */
-    public static List<int[]> toExplicit(DoubleMatrix X) {
-        ArrayList<int[]> explicit = new ArrayList<>(X.rows);
-        for (int i = 0; i < X.rows; i++) {
-            int[] row = new int[(int) X.getRow(i).sum()];
-            int idx = 0;
-            for (int j = 0; j < X.columns; j ++) {
-                if (X.get(i, j) == 1) {
-                    row[idx] = j;
-                    idx++;
-                }
-            }
-            explicit.add(row);
-        }
-        return explicit;
-    }
-
-    // transpose explicit
-    public static ArrayList<int[]> transposeExplicit(List<int[]> explicit, int vocabSize) {
-
-        ArrayList<List<Integer>> transposedList = new ArrayList<>(vocabSize);
-
-        // init
-        for (int i = 0; i < vocabSize; i++) transposedList.add(new ArrayList<>());
-
-        // transpose
-        for (int i = 0; i < explicit.size(); i++) {
-            for (int j : explicit.get(i)) {
-                transposedList.get(j).add(i);
-            }
-        }
-
-        // convert to array
-        ArrayList<int[]> transposed = new ArrayList<>(vocabSize);
-        for (List<Integer> list : transposedList) {
-            int[] array = new int[list.size()];
-            for(int j = 0; j < list.size(); j++) array[j] = list.get(j);
-            transposed.add(array);
-        }
-
-        return transposed;
     }
 
 

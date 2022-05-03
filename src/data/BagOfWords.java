@@ -4,7 +4,7 @@ package src.data;
  * Wrapper around int[] representing a bag of words.
  * All elements of the bag are either 0 or 1.
  * If bag[i] == 1 => i-th element of vocabulary is part of the sentence, else not.
- * */
+ */
 public class BagOfWords {
 
     private final int[] bag;

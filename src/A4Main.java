@@ -1,16 +1,16 @@
 package src;
 
+import src.classifier.TrecClassifier;
 import src.hyperparam.HyperParams;
 import src.hyperparam.HyperParamsConfig;
-import src.classifier.TrecClassifier;
 
 public class A4Main {
 
     /**
-     * Example A4Main class. Feel free to edit this file 
+     * Example A4Main class. Feel free to edit this file
      */
     public static void main(String[] args) {
-        if (args.length < 6){
+        if (args.length < 6) {
             System.out.println("Usage: java A4Main <part1/part2/part3/part4> <seed> <trainFile> " +
                     "<devFile> <testFile> <vocabFile> <classesFile> [<tracker-output-file>]");
             return;

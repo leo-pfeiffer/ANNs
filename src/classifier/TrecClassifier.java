@@ -30,19 +30,15 @@ public class TrecClassifier {
     private final String trainDataPath;
     private final String devDataPath;
     private final String testDataPath;
+    private final HyperParams params;
+    private final Tracker tracker = new Tracker();
     private TrecDataset trainSet;
     private TrecDataset devSet;
     private TrecDataset testSet;
-
     private int bagSize;
-
-    private final HyperParams params;
-
     private Loss lossFunc;
     private Optimizer optimizer;
     private Layer net;
-
-    private final Tracker tracker = new Tracker();
 
     /**
      * After instantiation:
@@ -50,7 +46,7 @@ public class TrecClassifier {
      * 2. createNetwork(net)
      * 3. train()
      * 4. evaluate()
-     * */
+     */
     public TrecClassifier(int seed, String trainData, String devDataPath, String testDataPath, HyperParams params) {
         Logger.getLogger().setLevel(Logger.WARNING);
         this.rnd = getSeededRandom(seed);
@@ -58,6 +54,21 @@ public class TrecClassifier {
         this.trainDataPath = trainData;
         this.devDataPath = devDataPath;
         this.testDataPath = testDataPath;
+    }
+
+    public static Pair<DoubleMatrix, DoubleMatrix> fromBatch(List<Pair<BagOfWords, Integer>> batch) {
+        if (batch == null)
+            return null;
+
+        double[][] xs = new double[batch.size()][];
+        double[] ys = new double[batch.size()];
+        for (int i = 0; i < batch.size(); i++) {
+            xs[i] = batch.get(i).first.toDouble();
+            ys[i] = (double) batch.get(i).second;
+        }
+        DoubleMatrix X = new DoubleMatrix(xs);
+        DoubleMatrix Y = new DoubleMatrix(ys.length, 1, ys);
+        return new Pair<>(X, Y);
     }
 
     public void load(String vocab, String classes) throws IOException {
@@ -77,7 +88,7 @@ public class TrecClassifier {
      * Neural Net for Part 1
      */
     public Sequential getNetworkP1() {
-        return new Sequential(new Layer[] {
+        return new Sequential(new Layer[]{
                 new Linear(bagSize, params.getSizeFirstHiddenLayer(), new WeightInitXavier()),
                 new ReLU(),
                 new Linear(params.getSizeFirstHiddenLayer(), params.getSizeOtherHiddenLayers(), new WeightInitXavier()),
@@ -92,7 +103,7 @@ public class TrecClassifier {
      * Neural Net for Part 2 with EmbeddingBag.
      */
     public Sequential getNetworkP2() {
-        return new Sequential(new Layer[] {
+        return new Sequential(new Layer[]{
                 new EmbeddingBag(bagSize, params.getSizeFirstHiddenLayer(), new WeightInitXavier()),
                 new ReLU(),
                 new Linear(params.getSizeFirstHiddenLayer(), params.getSizeOtherHiddenLayers(), new WeightInitXavier()),
@@ -107,7 +118,7 @@ public class TrecClassifier {
      * Neural Net for models with pre-computed weight matrix.
      */
     private Sequential getNetworkWithPrecomputed(String embeddingPath) throws IOException {
-        return new Sequential(new Layer[] {
+        return new Sequential(new Layer[]{
                 new EmbeddingBag(bagSize, params.getSizeFirstHiddenLayer(), PreComputedWordEmbedding.fromFile(embeddingPath)),
                 new ReLU(),
                 new Linear(params.getSizeFirstHiddenLayer(), params.getSizeOtherHiddenLayers(), new WeightInitXavier()),
@@ -117,7 +128,6 @@ public class TrecClassifier {
                 new Linear(params.getSizeOtherHiddenLayers(), params.getSizeOtherHiddenLayers(), new WeightInitXavier()),
                 new Softmax()});
     }
-
 
     /**
      * Neural Net for Part 3 with GloVe embeddings.
@@ -186,8 +196,7 @@ public class TrecClassifier {
             if (valAcc <= peakAcc) {
                 notAtPeak += 1;
                 System.out.printf("not at peak %d times consecutively\n", notAtPeak);
-            }
-            else {
+            } else {
                 notAtPeak = 0;
                 peakAcc = valAcc;
             }
@@ -234,21 +243,6 @@ public class TrecClassifier {
         return correct / data.getSize();
     }
 
-    public static Pair<DoubleMatrix, DoubleMatrix> fromBatch(List<Pair<BagOfWords, Integer>> batch) {
-        if (batch == null)
-            return null;
-
-        double[][] xs = new double[batch.size()][];
-        double[] ys = new double[batch.size()];
-        for (int i = 0; i < batch.size(); i++) {
-            xs[i] = batch.get(i).first.toDouble();
-            ys[i] = (double)batch.get(i).second;
-        }
-        DoubleMatrix X = new DoubleMatrix(xs);
-        DoubleMatrix Y = new DoubleMatrix(ys.length, 1, ys);
-        return new Pair<>(X, Y);
-    }
-
     public TrecDataset loadDataset(HyperParams params, boolean shuffle, Random rnd, String path, String name) throws IOException {
         TrecDataset dataset = new TrecDataset(params.getBatchSize(), shuffle, rnd, this.bagSize);
         dataset.fromFile(path);
@@ -258,7 +252,7 @@ public class TrecClassifier {
 
     public Random getSeededRandom(Integer seed) {
         org.jblas.util.Random.seed(seed);
-        return new Random(seed );
+        return new Random(seed);
     }
 
     public Tracker getTracker() {

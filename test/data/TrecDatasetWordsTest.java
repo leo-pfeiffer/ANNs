@@ -11,11 +11,12 @@ import src.util.FileUtil;
 
 public class TrecDatasetWordsTest {
 
-    String trainData = "data/part1/train.txt";
-    String vocabFile = "data/part1/vocab.txt";
     static {
         org.jblas.util.Random.seed(42);
     }
+
+    String trainData = "data/part1/train.txt";
+    String vocabFile = "data/part1/vocab.txt";
     Random rnd = new Random(42);
 
     @Test

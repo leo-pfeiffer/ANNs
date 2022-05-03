@@ -10,7 +10,7 @@ import java.util.List;
 public class FileUtil {
     /**
      * Count number of lines in a file (if the line is not empty).
-     * */
+     */
     public static int countLinesInFile(String path) throws IOException {
         int numLines = 0;
         BufferedReader br = new BufferedReader(new FileReader(path));
@@ -63,7 +63,7 @@ public class FileUtil {
     /**
      * Escape special characters in a string.
      * Source: https://www.baeldung.com/java-csv
-     * */
+     */
     public static String escapeSpecialCharacters(String data) {
         String escapedData = data.replaceAll("\\R", " ");
         if (data.contains(",") || data.contains("\"") || data.contains("'")) {

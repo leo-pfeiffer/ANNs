@@ -18,11 +18,11 @@ public class PreComputedWordEmbedding {
 
         ArrayList<double[]> lines = new ArrayList<>();
 
-        while((line = br.readLine()) != null) {
+        while ((line = br.readLine()) != null) {
             splitted = line.split(" ");
-            double[] weights = new double[splitted.length-1];
+            double[] weights = new double[splitted.length - 1];
             for (int i = 0; i < weights.length; i++) {
-                weights[i] = Double.parseDouble(splitted[i+1]);
+                weights[i] = Double.parseDouble(splitted[i + 1]);
             }
             lines.add(weights);
         }

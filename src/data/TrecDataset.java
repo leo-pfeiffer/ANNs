@@ -25,7 +25,7 @@ public class TrecDataset extends Dataset<BagOfWords, Integer> {
 
     /**
      * Input dimensions (= number of words in the vocabulary)
-     * */
+     */
     public int getInputDims() {
         return inputDims;
     }
@@ -42,7 +42,7 @@ public class TrecDataset extends Dataset<BagOfWords, Integer> {
         String[] splitted;
         String line;
 
-        while((line = br.readLine()) != null) {
+        while ((line = br.readLine()) != null) {
             splitted = line.split(" ; ");
             String[] words = splitted[0].split(" ");
             int[] tokens = new int[words.length];

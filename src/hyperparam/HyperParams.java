@@ -10,7 +10,8 @@ public class HyperParams {
     private int sizeFirstHiddenLayer;
     private int sizeOtherHiddenLayers;
 
-    public HyperParams() {}
+    public HyperParams() {
+    }
 
     public HyperParams(
             double learningRate,
@@ -33,52 +34,52 @@ public class HyperParams {
         return learningRate;
     }
 
-    public int getMaxNumEpochs() {
-        return maxNumEpochs;
-    }
-
-    public int getPatience() {
-        return patience;
-    }
-
-    public int getBatchSize() {
-        return batchSize;
-    }
-
-    public int getNumHiddenLayers() {
-        return numHiddenLayers;
-    }
-
-    public int getSizeFirstHiddenLayer() {
-        return sizeFirstHiddenLayer;
-    }
-
-    public int getSizeOtherHiddenLayers() {
-        return sizeOtherHiddenLayers;
-    }
-
     public void setLearningRate(double learningRate) {
         this.learningRate = learningRate;
+    }
+
+    public int getMaxNumEpochs() {
+        return maxNumEpochs;
     }
 
     public void setMaxNumEpochs(int maxNumEpochs) {
         this.maxNumEpochs = maxNumEpochs;
     }
 
+    public int getPatience() {
+        return patience;
+    }
+
     public void setPatience(int patience) {
         this.patience = patience;
+    }
+
+    public int getBatchSize() {
+        return batchSize;
     }
 
     public void setBatchSize(int batchSize) {
         this.batchSize = batchSize;
     }
 
+    public int getNumHiddenLayers() {
+        return numHiddenLayers;
+    }
+
     public void setNumHiddenLayers(int numHiddenLayers) {
         this.numHiddenLayers = numHiddenLayers;
     }
 
+    public int getSizeFirstHiddenLayer() {
+        return sizeFirstHiddenLayer;
+    }
+
     public void setSizeFirstHiddenLayer(int sizeFirstHiddenLayer) {
         this.sizeFirstHiddenLayer = sizeFirstHiddenLayer;
+    }
+
+    public int getSizeOtherHiddenLayers() {
+        return sizeOtherHiddenLayers;
     }
 
     public void setSizeOtherHiddenLayers(int sizeOtherHiddenLayers) {

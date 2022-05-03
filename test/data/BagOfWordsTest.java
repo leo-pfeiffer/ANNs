@@ -1,11 +1,10 @@
 package test.data;
 
-import org.junit.Test;
-
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import org.junit.Test;
 import src.data.BagOfWords;
 
 public class BagOfWordsTest {
@@ -25,7 +24,7 @@ public class BagOfWordsTest {
     @Test
     public void testToDouble() {
         BagOfWords bow = new BagOfWords(new int[]{1, 2, 3}, 6);
-        double[] expected = new double[] {0., 1., 1., 1., 0., 0.};
+        double[] expected = new double[]{0., 1., 1., 1., 0., 0.};
         double[] actual = bow.toDouble();
 
         for (int i = 0; i < expected.length; i++) {
