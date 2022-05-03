@@ -56,6 +56,7 @@ def timing_plot(data):
         x='Sample size', y="value", hue="variable", data=data, s=50
     )
     g.set_xscale("log")
+    g.set_yscale("log")
     plt.legend(title="Model")
     plt.ylabel(f'Time in ns', labelpad = 10)
     plt.savefig(f"{OUT_FOLDER}/timing.png", dpi=300, pad_inches=.15,
